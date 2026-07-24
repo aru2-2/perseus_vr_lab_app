@@ -21,11 +21,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
 
       routes: {
-      //  '/': (context) => const HomePage(),
-      //  '/vr_materials': (context) => const VRMaterials(),
-      //  '/posters_and_publications': (context) => const PostersAndPublications(),
-      //  '/intern_updates': (context) => const InternUpdates(),
-      //  '/robot': (context) => const Robot(),
+        '/': (context) => const HomePage(),
+        '/vr_materials': (context) => const VRMaterials(),
+        '/posters_and_publications': (context) => const PostersAndPublications(),
+        '/intern_updates': (context) => const InternUpdates(),
+        '/robot': (context) => const Robot(),
       },
     );
   }
