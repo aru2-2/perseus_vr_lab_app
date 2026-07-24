@@ -42,50 +42,40 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 40),
 
               CustomButton(
-                text: "Page One",
+                text: "VR Materials",
                 icon: Icons.looks_one,
                 onPressed: () {
-                  Navigator.pushNamed(context, "/page1");
+                  Navigator.pushNamed(context, "/vr_materials");
                 },
               ),
 
               const SizedBox(height: 15),
 
               CustomButton(
-                text: "Page Two",
+                text: "Posters and Publications",
                 icon: Icons.looks_two,
                 onPressed: () {
-                  Navigator.pushNamed(context, "/page2");
+                  Navigator.pushNamed(context, "/posters_and_publications");
                 },
               ),
 
               const SizedBox(height: 15),
 
               CustomButton(
-                text: "Page Three",
+                text: "Intern Updates",
                 icon: Icons.looks_3,
                 onPressed: () {
-                  Navigator.pushNamed(context, "/page3");
+                  Navigator.pushNamed(context, "/intern_updates");
                 },
               ),
 
               const SizedBox(height: 15),
 
               CustomButton(
-                text: "Page Four",
+                text: "Robot",
                 icon: Icons.looks_4,
                 onPressed: () {
-                  Navigator.pushNamed(context, "/page4");
-                },
-              ),
-
-              const SizedBox(height: 15),
-
-              CustomButton(
-                text: "Page Five",
-                icon: Icons.looks_5,
-                onPressed: () {
-                  Navigator.pushNamed(context, "/page5");
+                  Navigator.pushNamed(context, "/robot");
                 },
               ),
             ],
