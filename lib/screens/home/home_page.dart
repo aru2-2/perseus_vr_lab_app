@@ -2,14 +2,31 @@ import 'package:flutter/material.dart';
 import '../../widgets/custom_button.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final bool isDarkMode;
+  final VoidCallback onToggleTheme;
+
+  const HomePage({
+    super.key,
+    required this.isDarkMode,
+    required this.onToggleTheme,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My App"),
+        title: const Text("Warnell VR Lab"),
         centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              tooltip: isDarkMode ? 'Switch to light mode' : 'Switch to dark mode',
+              icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
+              onPressed: onToggleTheme,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -20,7 +37,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 30),
 
               const Text(
-                "Welcome!",
+                "Welcome to the VR Lab at the \nWarnell School of Forestry and Natural Resources!",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 32,
@@ -43,7 +60,7 @@ class HomePage extends StatelessWidget {
 
               CustomButton(
                 text: "VR Materials",
-                icon: Icons.looks_one,
+                icon: Icons.view_in_ar,
                 onPressed: () {
                   Navigator.pushNamed(context, "/vr_materials");
                 },
@@ -53,7 +70,7 @@ class HomePage extends StatelessWidget {
 
               CustomButton(
                 text: "Posters and Publications",
-                icon: Icons.looks_two,
+                icon: Icons.newspaper,
                 onPressed: () {
                   Navigator.pushNamed(context, "/posters_and_publications");
                 },
@@ -63,7 +80,7 @@ class HomePage extends StatelessWidget {
 
               CustomButton(
                 text: "Intern Updates",
-                icon: Icons.looks_3,
+                icon: Icons.circle_notifications,
                 onPressed: () {
                   Navigator.pushNamed(context, "/intern_updates");
                 },
@@ -73,7 +90,7 @@ class HomePage extends StatelessWidget {
 
               CustomButton(
                 text: "Robot",
-                icon: Icons.looks_4,
+                icon: Icons.smart_toy_outlined,
                 onPressed: () {
                   Navigator.pushNamed(context, "/robot");
                 },
