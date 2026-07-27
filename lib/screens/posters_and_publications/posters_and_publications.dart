@@ -1,56 +1,6 @@
+//import statements
 import 'package:flutter/material.dart';
-import 'package:visibility_detector/visibility_detector.dart';
-
-class LazyPosterImage extends StatefulWidget {
-  final String assetPath;
-
-  const LazyPosterImage({super.key, required this.assetPath});
-
-  @override
-  State<LazyPosterImage> createState() => _LazyPosterImageState();
-}
-
-class _LazyPosterImageState extends State<LazyPosterImage> {
-  bool _isVisible = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return VisibilityDetector(
-      key: Key(widget.assetPath),
-      onVisibilityChanged: (info) {
-        if (info.visibleFraction > 0.1 && !_isVisible) {
-          setState(() {
-            _isVisible = true;
-          });
-        }
-      },
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: SizedBox(
-          width: double.infinity,
-          height: 220,
-          child: _isVisible
-              ? Image.asset(
-                  widget.assetPath,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: Colors.grey[300],
-                      alignment: Alignment.center,
-                      child: const Text('Image unavailable'),
-                    );
-                  },
-                )
-              : Container(
-                  color: Colors.grey[200],
-                  alignment: Alignment.center,
-                  child: const Text('Loading image...'),
-                ),
-        ),
-      ),
-    );
-  }
-}
+import '../../widgets/lazy_image.dart';
 
 class PostersAndPublications extends StatelessWidget {
   const PostersAndPublications({super.key});
@@ -90,10 +40,10 @@ class PostersAndPublications extends StatelessWidget {
                 ),
               ),
       
-              
+
               const SizedBox(height: 25),
               // Image of Purdue poster presentation in 2026
-              LazyPosterImage(assetPath: 'lib/assets/images/perseus_purdue_poster_2026.jpeg'),
+              const LazyImage(assetPath: 'lib/assets/images/perseus_purdue_poster_2026.jpeg'),
 
 
               const SizedBox(height: 25),
@@ -111,7 +61,7 @@ class PostersAndPublications extends StatelessWidget {
               
               const SizedBox(height: 25),
               // Image of PERSEUS poster presentation at CURO 2026
-              LazyPosterImage(assetPath: 'lib/assets/images/perseus_curo_picture_2026.jpeg'),
+              const LazyImage(assetPath: 'lib/assets/images/perseus_curo_picture_2026.jpeg'),
 
 
               const SizedBox(height: 25),
@@ -129,7 +79,7 @@ class PostersAndPublications extends StatelessWidget {
 
               const SizedBox(height: 25),
               // Image of UGA presentation in 2025
-              LazyPosterImage(assetPath: 'lib/assets/images/perseus_uga_presentation_2025.jpeg'),
+              const LazyImage(assetPath: 'lib/assets/images/perseus_uga_presentation_2025.jpeg'),
 
 
               const SizedBox(height: 25),
