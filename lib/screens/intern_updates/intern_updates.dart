@@ -1,4 +1,6 @@
+//import statements
 import 'package:flutter/material.dart';
+import '../../widgets/lazy_image.dart';
 
 class InternUpdates extends StatelessWidget {
   const InternUpdates({super.key});
@@ -7,7 +9,7 @@ class InternUpdates extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Intern Updates"),
+        title: const Text("Warnell VR Lab"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -18,7 +20,7 @@ class InternUpdates extends StatelessWidget {
             children: [
               // Page Title
               const Text(
-                "VR Materials",
+                "Intern Updates",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,
@@ -27,34 +29,32 @@ class InternUpdates extends StatelessWidget {
               ),
 
               const SizedBox(height: 25),
-
-              // Image
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-               // child: Image.asset(
-               //   'assets/images/vr_lab_demo.jpg',
-               //   width: double.infinity,
-               //   height: 250,
-               //   fit: BoxFit.cover,
-              //  ),
-              ),
-
-              const SizedBox(height: 25),
-
-              // Description
+              // Description of overall page content
               const Text(
                 "Thank you for visiting the Intern Updates page!"
-                " Here, you'll find the latest information and updates about the Warnell VR Lab interns. "
-                "You can use this area to describe the content of the page, "
-                "provide instructions, or display information about the image "
-                "shown above. The text automatically wraps to multiple lines "
-                "and remains readable on different screen sizes.",
+                " Here, you'll find the latest information and updates about the Warnell VR Lab interns. ",
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.6,
                 ),
               ),
+
+              const SizedBox(height: 25),
+              // Image of forest VR equipment
+              const LazyImage(assetPath: 'lib/assets/images/perseus_vr_camera_woods.jpeg'),
+
+              const SizedBox(height: 25),
+              // Description of the forest VR equipment image
+              const Text(
+                "This image showcases the VR equipment used by the Warnell VR Lab interns to capture tree imagery at Whitehall Forest.(fix description)",
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                  fontSize: 18,
+                  height: 1.6,
+                ),
+              ),
+
             ],
           ),
         ),
