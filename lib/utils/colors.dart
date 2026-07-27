@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const primary = Colors.blue;
-  static const secondary = Colors.orange;
-  static const background = Color(0xFFF5F5F5);
-  static const text = Colors.black87;
-}
 
-//(note to self: this is just an example of how to use the colors defined in AppColors class)
-//Anywhere in the app:
-//import '../utils/colors.dart';
-//backgroundColor: AppColors.primary
+  static const primary = Color(0xFF2E7D32);
+  static const secondary = Color(0xFFFF9800);
+  static const backgroundLight = Color(0xFFF5F5F5);
+  static const backgroundDark = Color(0xFF121212);
+  static const textLight = Color(0xFF1F1F1F);
+  static const textDark = Color(0xFFF5F5F5);
+  static const cardLight = Color(0xFFFFFFFF);
+  static const cardDark = Color(0xFF1E1E1E);
+  static const mutedText = Color(0xFF757575);
+  static const buttonText = Color(0xFFFFFFFF);
+}
