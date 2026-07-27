@@ -18,7 +18,7 @@ class Robot extends StatelessWidget {
             children: [
               // Page Title
               const Text(
-                "VR Materials",
+                "Meet Percy, the Warnell VR Lab Robot!",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,
@@ -45,10 +45,9 @@ class Robot extends StatelessWidget {
               const Text(
                 "Thank you for visiting the Robot page!"
                 " Here, you'll find updates about Percy, our Warnell VR Lab robot!"
-                "You can use this area to describe the content of the page, "
-                "provide instructions, or display information about the image "
-                "shown above. The text automatically wraps to multiple lines "
-                "and remains readable on different screen sizes.",
+                " Percy is a cutting-edge robot designed for research and education."
+                " He will explore the UGA campus, collecting LiDAR data and capturing images to create a model of the trees around his home."
+                " Percy is still in development, but we are excited to share his progress with you!",
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 18,
