@@ -1,7 +1,11 @@
+//import statements
 import 'package:flutter/material.dart';
 import '../../widgets/theme_toggle_button.dart';
 
+//creates the Robot page of the app
 class Robot extends StatelessWidget {
+  
+  //toggles between light and dark mode
   final bool isDarkMode;
   final VoidCallback onToggleTheme;
 
@@ -11,6 +15,7 @@ class Robot extends StatelessWidget {
     required this.onToggleTheme,
   });
 
+//builds the Robot page widget
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,21 +46,7 @@ class Robot extends StatelessWidget {
               ),
 
               const SizedBox(height: 25),
-
-              // Image
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-               // child: Image.asset(
-               //   'assets/images/vr_lab_demo.jpg',
-               //   width: double.infinity,
-               //   height: 250,
-               //   fit: BoxFit.cover,
-              //  ),
-              ),
-
-              const SizedBox(height: 25),
-
-              // Description
+              // coming soon message for robot development
               const Text(
                 "Thank you for visiting the Robot page!"
                 " Here, you'll find updates about Percy, our Warnell VR Lab robot!"

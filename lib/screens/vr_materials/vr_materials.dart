@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import '../../widgets/lazy_image.dart';
 import '../../widgets/theme_toggle_button.dart';
 
+//creates the VR Materials page of the app
 class VRMaterials extends StatelessWidget {
+  
+  //toggles between light and dark mode
   final bool isDarkMode;
   final VoidCallback onToggleTheme;
 
@@ -13,6 +16,7 @@ class VRMaterials extends StatelessWidget {
     required this.onToggleTheme,
   });
 
+  //builds the VR Materials page widget
   @override
   Widget build(BuildContext context) {
     return Scaffold(
