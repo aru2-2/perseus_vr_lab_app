@@ -19,7 +19,10 @@ class WarnellVRLab extends StatefulWidget {
   State<WarnellVRLab> createState() => _WarnellVRLabState();
 }
 
+//state class for the main class
+//controls the toggle between light mode and dark mode, and defines the routes for the different screens of the app
 class _WarnellVRLabState extends State<WarnellVRLab> {
+  //controls the toggle between light mode and dark mode
   bool isDarkMode = false;
 
   void toggleTheme() {
@@ -83,10 +86,22 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
               isDarkMode: isDarkMode,
               onToggleTheme: toggleTheme,
             ),
-        '/vr_materials': (context) => const VRMaterials(),
-        '/posters_and_publications': (context) => const PostersAndPublications(),
-        '/intern_updates': (context) => const InternUpdates(),
-        '/robot': (context) => const Robot(),
+        '/vr_materials': (context) => VRMaterials(
+              isDarkMode: isDarkMode,
+              onToggleTheme: toggleTheme,
+            ),
+        '/posters_and_publications': (context) => PostersAndPublications(
+              isDarkMode: isDarkMode,
+              onToggleTheme: toggleTheme,
+            ),
+        '/intern_updates': (context) => InternUpdates(
+              isDarkMode: isDarkMode,
+              onToggleTheme: toggleTheme,
+            ),
+        '/robot': (context) => Robot(
+              isDarkMode: isDarkMode,
+              onToggleTheme: toggleTheme,
+            ),
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
