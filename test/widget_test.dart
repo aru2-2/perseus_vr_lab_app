@@ -8,17 +8,22 @@ void main() {
   testWidgets('unknown routes do not surface unhandled exceptions', (tester) async {
     await tester.pumpWidget(const WarnellVRLab());
 
+    //navigate to an unknown route and verify that no unhandled exceptions are thrown
     final context = tester.element(find.text('Warnell VR Lab'));
     Navigator.of(context).pushNamed('/missing-route');
 
+    //wait for the navigation to complete and verify that no unhandled exceptions are thrown
     await tester.pumpAndSettle();
 
+    //verify that no unhandled exceptions are thrown
     expect(tester.takeException(), isNull);
   });
 
+//regression test ensures that the theme toggle button is available on each screen of the app
   testWidgets('theme toggle is available on each screen', (tester) async {
     await tester.pumpWidget(const WarnellVRLab());
 
+    //list of routes to test based on screens in the app
     final routes = [
       '/',
       '/vr_materials',
@@ -27,6 +32,7 @@ void main() {
       '/robot',
     ];
 
+    //loop through each route and verify that the theme toggle button is available on each screen
     for (final route in routes) {
       await tester.pumpWidget(const WarnellVRLab());
       final context = tester.element(find.text('Warnell VR Lab'));
