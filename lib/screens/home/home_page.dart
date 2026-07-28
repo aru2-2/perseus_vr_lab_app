@@ -1,6 +1,8 @@
+//import statements
 import 'package:flutter/material.dart';
 import '../../widgets/custom_button.dart';
 
+//main class for the home page
 class HomePage extends StatelessWidget {
   final bool isDarkMode;
   final VoidCallback onToggleTheme;
@@ -11,6 +13,7 @@ class HomePage extends StatelessWidget {
     required this.onToggleTheme,
   });
 
+  //builds the home page widget
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +21,7 @@ class HomePage extends StatelessWidget {
         title: const Text("Warnell VR Lab"),
         centerTitle: true,
         actions: [
+          //theme toggle button in the app bar
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
@@ -36,6 +40,7 @@ class HomePage extends StatelessWidget {
             children: [
               const SizedBox(height: 30),
 
+              // welcome message for the home page of the app
               const Text(
                 "Welcome to the VR Lab at the \nWarnell School of Forestry and Natural Resources!",
                 textAlign: TextAlign.center,
@@ -45,8 +50,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 15),
 
+              const SizedBox(height: 15),
+              // prompts user to choose one of the options below to continue
               const Text(
                 "Choose one of the options below to continue.",
                 textAlign: TextAlign.center,
@@ -57,7 +63,7 @@ class HomePage extends StatelessWidget {
               ),
 
               const SizedBox(height: 40),
-
+              //button to navigate to the VR Materials page
               CustomButton(
                 text: "VR Materials",
                 icon: Icons.view_in_ar,
@@ -67,7 +73,7 @@ class HomePage extends StatelessWidget {
               ),
 
               const SizedBox(height: 15),
-
+              //button to navigate to the Posters and Publications page
               CustomButton(
                 text: "Posters and Publications",
                 icon: Icons.newspaper,
@@ -77,7 +83,7 @@ class HomePage extends StatelessWidget {
               ),
 
               const SizedBox(height: 15),
-
+              //button to navigate to the Intern Updates page
               CustomButton(
                 text: "Intern Updates",
                 icon: Icons.circle_notifications,
@@ -87,7 +93,7 @@ class HomePage extends StatelessWidget {
               ),
 
               const SizedBox(height: 15),
-
+              //button to navigate to the Robot page
               CustomButton(
                 text: "Robot",
                 icon: Icons.smart_toy_outlined,

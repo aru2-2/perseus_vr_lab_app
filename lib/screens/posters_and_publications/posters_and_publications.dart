@@ -1,9 +1,17 @@
 //import statements
 import 'package:flutter/material.dart';
 import '../../widgets/lazy_image.dart';
+import '../../widgets/theme_toggle_button.dart';
 
 class PostersAndPublications extends StatelessWidget {
-  const PostersAndPublications({super.key});
+  final bool isDarkMode;
+  final VoidCallback onToggleTheme;
+
+  const PostersAndPublications({
+    super.key,
+    required this.isDarkMode,
+    required this.onToggleTheme,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +19,12 @@ class PostersAndPublications extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Warnell VR Lab"),
         centerTitle: true,
+        actions: [
+          ThemeToggleButton(
+            isDarkMode: isDarkMode,
+            onToggleTheme: onToggleTheme,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

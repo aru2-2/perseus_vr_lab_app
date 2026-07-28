@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import '../../widgets/theme_toggle_button.dart';
 
 class Robot extends StatelessWidget {
-  const Robot({super.key});
+  final bool isDarkMode;
+  final VoidCallback onToggleTheme;
+
+  const Robot({
+    super.key,
+    required this.isDarkMode,
+    required this.onToggleTheme,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -9,6 +17,12 @@ class Robot extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Robot"),
         centerTitle: true,
+        actions: [
+          ThemeToggleButton(
+            isDarkMode: isDarkMode,
+            onToggleTheme: onToggleTheme,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -47,7 +61,7 @@ class Robot extends StatelessWidget {
                 " Here, you'll find updates about Percy, our Warnell VR Lab robot!"
                 " Percy is a cutting-edge robot designed for research and education."
                 " He will explore the UGA campus, collecting LiDAR data and capturing images to create a model of the trees around his home."
-                " Percy is still in development, but we are excited to share his progress with you!",
+                " Percy is still in development, but we are excited to introduce him to you soon!",
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 18,
