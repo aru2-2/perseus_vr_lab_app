@@ -1,11 +1,14 @@
+//import statements
 import 'package:flutter/material.dart';
 import '../utils/colors.dart';
 
+//creates custom button widgets across the app with a consistent style and behavior
 class CustomButton extends StatelessWidget {
   final String text;
   final IconData icon;
   final VoidCallback onPressed;
 
+//constructor for the CustomButton class
   const CustomButton({
     super.key,
     required this.text,
@@ -13,6 +16,7 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
   });
 
+//builds the CustomButton widget with specified text, icon, and onPressed callback
   @override
   Widget build(BuildContext context) {
     return SizedBox(
