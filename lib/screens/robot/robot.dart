@@ -70,6 +70,7 @@ class Robot extends StatelessWidget {
                           color: AppColors.buttonText,
                         ),
                       ),
+                    //Coming soon message and description about Percy, the Warnell VR Lab robot
                       const SizedBox(height: 20),
                       Text(
                         "Coming Soon",
@@ -79,9 +80,10 @@ class Robot extends StatelessWidget {
                           color: colorScheme.primary,
                         ),
                       ),
+                      //longer description about Percy's development
                       const SizedBox(height: 12),
                       Text(
-                        "Percy, our Warnell VR Lab robot, is still being developed, but soon you’ll be able to explore updates about his research missions as he collects LiDAR data and captures images of the trees around his home.",
+                        "Percy, our Warnell VR Lab robot, is still in development. Soon, you’ll be able to explore updates about his research missions as he collects LiDAR data and captures images of the trees around his home.",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           height: 1.6,
@@ -95,6 +97,7 @@ class Robot extends StatelessWidget {
                           color: isDark ? const Color(0xFF24312A) : const Color(0xFFF2F7F0),
                           borderRadius: BorderRadius.circular(16),
                         ),
+                        //shorter, catchier message for users
                         child: Text(
                           "Stay tuned for Percy's adventures around the UGA campus!",
                           textAlign: TextAlign.center,
