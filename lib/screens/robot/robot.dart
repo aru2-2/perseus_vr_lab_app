@@ -1,5 +1,6 @@
 //import statements
 import 'package:flutter/material.dart';
+import '../../utils/colors.dart';
 import '../../widgets/theme_toggle_button.dart';
 
 //creates the Robot page of the app
@@ -18,6 +19,9 @@ class Robot extends StatelessWidget {
 //builds the Robot page widget
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Robot"),
@@ -29,37 +33,82 @@ class Robot extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Page Title
-              const Text(
-                "Meet Percy, the Warnell VR Lab Robot!",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 640),
+              child: Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                  side: BorderSide(
+                    color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                    width: 1.2,
+                  ),
+                ),
+                color: isDark ? AppColors.cardDark : AppColors.cardLight,
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: const LinearGradient(
+                            colors: [AppColors.primary, AppColors.secondary],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.smart_toy_outlined,
+                          size: 40,
+                          color: AppColors.buttonText,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        "Coming Soon",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: colorScheme.primary,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        "Percy, our Warnell VR Lab robot, is still being developed, but soon you’ll be able to explore updates about his research missions as he collects LiDAR data and captures images of the trees around his home.",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          height: 1.6,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        decoration: BoxDecoration(
+                          color: isDark ? const Color(0xFF24312A) : const Color(0xFFF2F7F0),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Text(
+                          "Stay tuned for Percy's adventures around the UGA campus!",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: isDark ? AppColors.textDark : AppColors.textLight,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-
-              const SizedBox(height: 25),
-              // coming soon message for robot development
-              const Text(
-                "Thank you for visiting the Robot page!"
-                " Here, you'll find updates about Percy, our Warnell VR Lab robot!"
-                " Percy is a cutting-edge robot designed for research and education."
-                " He will explore the UGA campus, collecting LiDAR data and capturing images to create a model of the trees around his home."
-                " Percy is still in development, but we are excited to introduce him to you soon!",
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                  fontSize: 18,
-                  height: 1.6,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
