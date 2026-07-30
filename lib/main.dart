@@ -39,41 +39,77 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
       title: 'Warnell VR Lab',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.light,
         scaffoldBackgroundColor: AppColors.backgroundLight,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+          brightness: Brightness.light,
+        ),
         appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.primary,
           foregroundColor: AppColors.buttonText,
+          elevation: 0,
+        ),
+        cardTheme: const CardThemeData(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(18)),
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primary,
             foregroundColor: AppColors.buttonText,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
           ),
         ),
         textTheme: const TextTheme(
           bodyLarge: TextStyle(color: AppColors.textLight),
           bodyMedium: TextStyle(color: AppColors.textLight),
           titleLarge: TextStyle(color: AppColors.textLight),
+          headlineMedium: TextStyle(color: AppColors.textLight),
         ),
       ),
       darkTheme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.dark,
         scaffoldBackgroundColor: AppColors.backgroundDark,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+          brightness: Brightness.dark,
+        ),
         appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.primary,
           foregroundColor: AppColors.buttonText,
+          elevation: 0,
+        ),
+        cardTheme: const CardThemeData(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(18)),
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primary,
             foregroundColor: AppColors.buttonText,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
           ),
         ),
         textTheme: const TextTheme(
           bodyLarge: TextStyle(color: AppColors.textDark),
           bodyMedium: TextStyle(color: AppColors.textDark),
           titleLarge: TextStyle(color: AppColors.textDark),
+          headlineMedium: TextStyle(color: AppColors.textDark),
         ),
       ),
       themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
@@ -103,6 +139,7 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
               onToggleTheme: toggleTheme,
             ),
       },
+      //handles unknown routes and displays a simple page not found message
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
           builder: (context) => const Scaffold(
