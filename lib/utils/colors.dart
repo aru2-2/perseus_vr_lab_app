@@ -1,5 +1,8 @@
+//import statement
 import 'package:flutter/material.dart';
 
+//app color palette
+//includes light and dark mode colors
 class AppColors {
   static const primary = Color(0xFF2E6F40);
   static const secondary = Color(0xFF4F8A5B);
