@@ -103,6 +103,20 @@ class VRMaterials extends StatelessWidget {
                 ),
               ),
 
+              //description of VR history infographic from PMRC
+              const SizedBox(height: 25),
+              const Text(
+                "This infographic illustrates the history of virtual reality, from its first prototype to a tool for immersive forestry education at Warnell.",
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                  fontSize: 18,
+                  height: 1.6,
+                ),
+              ),
+
+              const SizedBox(height: 100),
+              //Image of VR evolution graphic from UGA PMRC
+              const LazyImage(assetPath: 'lib/assets/images/perseus_vr_evolution_graphic.jpeg'),
 
             ],
           ),
