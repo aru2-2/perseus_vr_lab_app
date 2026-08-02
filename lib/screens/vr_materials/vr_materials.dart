@@ -1,7 +1,10 @@
 //import statements
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../widgets/lazy_image.dart';
 import '../../widgets/theme_toggle_button.dart';
+
+const String youtubeChannelUrl = 'https://www.youtube.com/@warnellvrlab';
 
 //creates the VR Materials page of the app
 class VRMaterials extends StatelessWidget {
@@ -65,8 +68,7 @@ class VRMaterials extends StatelessWidget {
               const SizedBox(height: 25),
               // Description of actions for the user to take on this page regarding VR headsets
               const Text(
-                "The Warnell VR Lab interns have created a YouTube page for 360-degree forestry videos."
-                " You can check out VR headsets for yourself or a group of people using the checkout form and supplemental documents below.",
+                "The Warnell VR Lab interns have created a YouTube page for 360-degree forestry videos.",
                 textAlign: TextAlign.justify,
                 style: TextStyle(
                   fontSize: 18,
@@ -74,9 +76,33 @@ class VRMaterials extends StatelessWidget {
                 ),
               ),
 
+              //YouTube channel button will open the hyperlink in an external browser when pressed
+              const SizedBox(height: 18),
+              TextButton.icon(
+                //button opens YouTube channel in external browser
+                onPressed: () async {
+                  final uri = Uri.parse(youtubeChannelUrl);
+                  //throws exception if URL cannot be launched
+                  if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+                    throw Exception('Could not launch $uri');
+                    }
+                },
+                //icon and label to display on the button
+                icon: const Icon(Icons.play_circle_fill_rounded),
+                label: const Text('Visit the YouTube channel'),
+              ),
+
+              //description of VR headset checkout form and supplemental materials
               const SizedBox(height: 25),
-              //Image of VR evolution graphic from UGA PMRC
-              const LazyImage(assetPath: 'lib/assets/images/perseus_vr_evolution_graphic.jpeg'),
+              const Text(
+                "You can also check out VR headsets for yourself or a group of people using the checkout form and supplemental documents below.",
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                  fontSize: 18,
+                  height: 1.6,
+                ),
+              ),
+
 
             ],
           ),
