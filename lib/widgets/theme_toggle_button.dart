@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-//creates a toggle between light mode and dark mode throughout the app
+//creates a settings icon button that routes to the settings screen
 class ThemeToggleButton extends StatelessWidget {
   final bool isDarkMode;
   final VoidCallback onToggleTheme;
@@ -16,9 +16,11 @@ class ThemeToggleButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
       child: IconButton(
-        tooltip: isDarkMode ? 'Switch to light mode' : 'Switch to dark mode',
-        icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
-        onPressed: onToggleTheme,
+        tooltip: 'Open settings',
+        icon: const Icon(Icons.settings),
+        onPressed: () {
+          Navigator.pushNamed(context, '/settings');
+        },
       ),
     );
   }
