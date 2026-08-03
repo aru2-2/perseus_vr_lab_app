@@ -49,9 +49,8 @@ class InternUpdates extends StatelessWidget {
               const SizedBox(height: 25),
               // Description of overall page content
               const Text(
-                "Thank you for visiting the Intern Updates page!"
-                " Here, you'll find the latest information and updates about the Warnell VR Lab interns. ",
-                textAlign: TextAlign.justify,
+                "Stay updated with the latest news on the Warnell VR Lab interns. ",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.6,
@@ -67,7 +66,7 @@ class InternUpdates extends StatelessWidget {
               // Description of the forest VR equipment image
               const Text(
                 "In this image, some of the PERSEUS Project interns are competing to identify the correct tree diameter using DBH measurements.",
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.6,
@@ -82,7 +81,8 @@ class InternUpdates extends StatelessWidget {
               const SizedBox(height: 25),
               // Description of the forest VR equipment image
               const Text(
-                "This image showcases the equipment used by the Warnell VR Lab interns to capture tree imagery at Whitehall Forest.",             textAlign: TextAlign.justify,
+                "This image showcases the equipment used by the Warnell VR Lab interns to capture tree imagery at Whitehall Forest.",             
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.6,

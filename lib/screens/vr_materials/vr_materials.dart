@@ -52,9 +52,8 @@ class VRMaterials extends StatelessWidget {
               const SizedBox(height: 25),
               // Description of overall content on this page
               const Text(
-                "Thank you for visiting the VR Materials page!"
-                " Here, you'll find a collection of resources and materials related to the Warnell VR Lab. ",
-                textAlign: TextAlign.justify,
+                "This page houses a collection of resources and materials related to the Warnell VR Lab. ",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.6,
@@ -69,7 +68,7 @@ class VRMaterials extends StatelessWidget {
               // Description of actions for the user to take on this page regarding VR headsets
               const Text(
                 "The Warnell VR Lab interns have created a YouTube page for 360-degree forestry videos.",
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.6,
@@ -96,7 +95,7 @@ class VRMaterials extends StatelessWidget {
               const SizedBox(height: 25),
               const Text(
                 "You can also check out VR headsets for yourself or a group of people using the checkout form and supplemental documents below.",
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.6,
@@ -107,7 +106,7 @@ class VRMaterials extends StatelessWidget {
               const SizedBox(height: 25),
               const Text(
                 "This infographic illustrates the history of virtual reality, from its first prototype to a tool for immersive forestry education at Warnell.",
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.6,

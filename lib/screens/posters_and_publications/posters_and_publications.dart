@@ -49,9 +49,8 @@ class PostersAndPublications extends StatelessWidget {
               const SizedBox(height: 25),
               // Description of overall page content
               const Text(
-                "Thank you for visiting the Posters and Publications page!" 
-                " Here, you'll find a collection of posters and publications related to the Warnell VR Lab.",
-                textAlign: TextAlign.justify,
+                "Explore the collection of posters and publications related to the Warnell VR Lab.",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.6,
@@ -70,7 +69,7 @@ class PostersAndPublications extends StatelessWidget {
                 "Joey, Addy, and Maadhavan presented about the Warnell VR Lab at the Application and Solutions in Digital Forestry International Conference at Purdue University."
                 " They showcased the capabilities of our VR Lab as experiential learning in immersive solutions."
                 " (fix and add more details)",
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.6,
@@ -88,7 +87,7 @@ class PostersAndPublications extends StatelessWidget {
                 "Joey, Addy, and Maadhavan presented about forestry education in a virtual world at CURO 2026, showcasing the capabilities of our VR Lab and the potential applications of our research." 
                 " The poster highlighted their work in 360-degree virtual reality and LiDAR simulations in the classroom."
                 " (fix and add more details)",
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.6,
@@ -106,7 +105,7 @@ class PostersAndPublications extends StatelessWidget {
                 "Maadhavan presented about forests in a virtual world at the 2025 PERSEUS Annual Meeting at the University of Georgia." 
                 " His presentation demonstrated initial research into using virtual reality headsets to advance the PERSEUS Project objectives."
                 " (fix and add more details)",
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.6,
