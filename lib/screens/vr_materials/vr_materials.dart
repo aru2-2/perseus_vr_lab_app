@@ -114,11 +114,11 @@ class VRMaterials extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 100),
+              const SizedBox(height: 50),
               //Image of VR evolution graphic from UGA PMRC
               const LazyImage(assetPath: 'lib/assets/images/perseus_vr_evolution_graphic.jpeg'),
 
-            ],
+            ]
           ),
         ),
       ),

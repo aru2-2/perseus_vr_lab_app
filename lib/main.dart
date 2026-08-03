@@ -5,6 +5,7 @@ import 'screens/vr_materials/vr_materials.dart';
 import 'screens/posters_and_publications/posters_and_publications.dart';
 import 'screens/intern_updates/intern_updates.dart';
 import 'screens/robot/robot.dart';
+import 'screens/settings/settings_page.dart';
 import 'utils/colors.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class WarnellVRLab extends StatefulWidget {
 }
 
 //state class for the main class
-//controls the toggle between light mode and dark mode, and defines the routes for the different screens of the app
+//controls the toggle between light mode and dark mode as well as defines the routes for the different screens of the app
 class _WarnellVRLabState extends State<WarnellVRLab> {
   //controls the toggle between light mode and dark mode
   bool isDarkMode = false;
@@ -135,6 +136,10 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
               onToggleTheme: toggleTheme,
             ),
         '/robot': (context) => Robot(
+              isDarkMode: isDarkMode,
+              onToggleTheme: toggleTheme,
+            ),
+        '/settings': (context) => SettingsPage(
               isDarkMode: isDarkMode,
               onToggleTheme: toggleTheme,
             ),

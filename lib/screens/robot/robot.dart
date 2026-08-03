@@ -83,7 +83,7 @@ class Robot extends StatelessWidget {
                       //longer description about Percy's development
                       const SizedBox(height: 12),
                       Text(
-                        "Percy, our Warnell VR Lab robot, is still in development. Soon, you’ll be able to explore updates about his research missions as he collects LiDAR data and captures images of the trees around his home.",
+                        "Percy, our Warnell VR Lab robot, is still in development. Soon, you’ll be able to explore updates about his research missions as he collects LiDAR data and captures tree imagery around his home.",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           height: 1.6,

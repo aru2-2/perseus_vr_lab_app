@@ -23,13 +23,15 @@ class HomePage extends StatelessWidget {
         title: const Text("Warnell VR Lab"),
         centerTitle: true,
         actions: [
-          //adds message when hovering over icon for user to switch between light and dark mode
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
+            //displays settings button on home page
             child: IconButton(
-              tooltip: isDarkMode ? 'Switch to light mode' : 'Switch to dark mode',
-              icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
-              onPressed: onToggleTheme,
+              tooltip: 'Open settings',
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                Navigator.pushNamed(context, '/settings');
+              },
             ),
           ),
         ],
@@ -41,6 +43,7 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 16),
+              //title card that introduces the app's purpose and content
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -67,14 +70,8 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
-              Text(
-                "Choose a section to continue",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+              
+              //individual buttons for the different screens of the app
               const SizedBox(height: 16),
               CustomButton(
                 text: "VR Materials",
