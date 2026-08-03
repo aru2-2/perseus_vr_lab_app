@@ -103,7 +103,15 @@ class HomePage extends StatelessWidget {
               //  onPressed: () {
               //    Navigator.pushNamed(context, "/robot");
               //  },
-              //),
+              //)
+              const SizedBox(height: 12),
+              CustomButton(
+                text: "Contact Form",
+                icon: Icons.feedback_outlined,
+                onPressed: () {
+                  Navigator.pushNamed(context, "/contact_form");
+                },
+              ),
             ],
           ),
         ),
