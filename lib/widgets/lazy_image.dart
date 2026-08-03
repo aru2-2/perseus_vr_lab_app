@@ -11,7 +11,7 @@ class LazyImage extends StatefulWidget {
   const LazyImage({
     super.key,
     required this.assetPath,
-    this.height = 220,
+    this.height = 300,
   });
 
   @override
