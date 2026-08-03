@@ -96,14 +96,14 @@ class HomePage extends StatelessWidget {
                   Navigator.pushNamed(context, "/intern_updates");
                 },
               ),
-              const SizedBox(height: 12),
-              CustomButton(
-                text: "Robot",
-                icon: Icons.smart_toy_outlined,
-                onPressed: () {
-                  Navigator.pushNamed(context, "/robot");
-                },
-              ),
+              //const SizedBox(height: 12),
+              //CustomButton(
+              //  text: "Robot",
+              // icon: Icons.smart_toy_outlined,
+              //  onPressed: () {
+              //    Navigator.pushNamed(context, "/robot");
+              //  },
+              //),
             ],
           ),
         ),
