@@ -2,14 +2,18 @@
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
-  //toggles between light and dark mode
+  //variables for the features of the settings screen
   final bool isDarkMode;
   final VoidCallback onToggleTheme;
+  final double fontScale;
+  final ValueChanged<double> onChangeFontScale;
 
   const SettingsPage({
     super.key,
     required this.isDarkMode,
     required this.onToggleTheme,
+    required this.fontScale,
+    required this.onChangeFontScale,
   });
 
   //builds the settings page widget
@@ -26,17 +30,42 @@ class SettingsPage extends StatelessWidget {
         padding: const EdgeInsets.all(24.0),
         child: Card(
           child: Padding(
-            //switches between light and dark mode when toggled by user
             padding: const EdgeInsets.all(20.0),
-            child: SwitchListTile(
-              title: const Text('Theme'),
-              subtitle: Text(
-                isDark ? 'Dark mode is enabled' : 'Light mode is enabled',
-              ),
-              value: isDark,
-              onChanged: (_) {
-                onToggleTheme();
-              },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SwitchListTile(
+                  //switches between light and dark mode
+                  title: const Text('Theme'),
+                  subtitle: Text(
+                    isDark ? 'Dark mode is enabled' : 'Light mode is enabled',
+                  ),
+                  value: isDark,
+                  onChanged: (_) {
+                    onToggleTheme();
+                  },
+                ),
+                //slider adjusts the font size for the app based on the user's preferences
+                const SizedBox(height: 12),
+                Text(
+                  'Font size',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const SizedBox(height: 6),
+                Slider(
+                  value: fontScale,
+                  min: 0.8,
+                  max: 1.4,
+                  divisions: 6,
+                  label: '${fontScale.toStringAsFixed(1)}x',
+                  onChanged: onChangeFontScale,
+                ),
+                Text(
+                  'Current size: ${fontScale.toStringAsFixed(1)}x',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
             ),
           ),
         ),
