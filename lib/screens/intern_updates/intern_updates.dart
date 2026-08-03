@@ -85,7 +85,7 @@ class InternUpdates extends StatelessWidget {
                       //longer description about Percy's development
                       const SizedBox(height: 12),
                       Text(
-                        "Percy, our Warnell VR Lab robot, is still in development. Soon, you’ll be able to explore updates about his research missions as he collects LiDAR data and captures tree imagery around his home.",
+                        "Percy, our Warnell VR Lab robot, is still in development. He will collect LiDAR data and capture tree imagery around his home.",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           height: 1.6,
@@ -156,6 +156,21 @@ class InternUpdates extends StatelessWidget {
                 ),
               ),
 
+              // Image of drone in the forest
+              const SizedBox(height: 25),
+              const LazyImage(assetPath: 'lib/assets/images/perseus_drone_in_forest.JPG'),
+
+              const SizedBox(height: 25),
+              // Description of the drone in forest image
+              const Text(
+                "In the image above, the Warnell VR lab interns learn how to operate a drone that captures land cover data over Whitehall Forest.",             
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  height: 1.6,
+                ),
+              ),
+
 
               const SizedBox(height: 25),
               // Image of forest VR equipment
@@ -164,7 +179,7 @@ class InternUpdates extends StatelessWidget {
               const SizedBox(height: 25),
               // Description of the forest VR equipment image
               const Text(
-                "This image showcases the equipment used by the Warnell VR Lab interns to capture tree imagery at Whitehall Forest.",             
+                "This image showcases the 360-degree camera equipment used by the Warnell VR Lab interns to capture tree imagery at Whitehall Forest.",             
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
