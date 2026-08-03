@@ -20,8 +20,8 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-//regression test ensures that the theme toggle button is available on each screen of the app
-  testWidgets('theme toggle is available on each screen', (tester) async {
+//regression test ensures that the settings button is available on each screen of the app
+  testWidgets('settings button is available on each screen', (tester) async {
     await tester.pumpWidget(const WarnellVRLab());
 
     //list of routes to test based on screens in the app
@@ -33,17 +33,18 @@ void main() {
       '/robot',
     ];
 
-    //loop through each route and verify that the theme toggle button is available on each screen
+    //loop through each route and verify that the settings button is available on each screen
     for (final route in routes) {
       await tester.pumpWidget(const WarnellVRLab());
       final context = tester.element(find.text('Warnell VR Lab'));
       Navigator.of(context).pushNamed(route);
       await tester.pumpAndSettle();
 
-      expect(find.byTooltip('Switch to dark mode'), findsOneWidget);
+      expect(find.byTooltip('Open settings'), findsOneWidget);
     }
   });
 
+//regression test ensures that the custom button handles long labels without overflow
   testWidgets('custom button handles long labels without overflow', (tester) async {
     tester.view.physicalSize = const Size(360, 800);
     tester.view.devicePixelRatio = 1.0;
