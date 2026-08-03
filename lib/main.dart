@@ -25,10 +25,19 @@ class WarnellVRLab extends StatefulWidget {
 class _WarnellVRLabState extends State<WarnellVRLab> {
   //controls the toggle between light mode and dark mode
   bool isDarkMode = false;
+  //displays default font size
+  double fontScale = 1.0;
 
   void toggleTheme() {
     setState(() {
       isDarkMode = !isDarkMode;
+    });
+  }
+
+  //updates the font scale based on user selection
+  void updateFontScale(double newScale) {
+    setState(() {
+      fontScale = newScale;
     });
   }
 
@@ -39,6 +48,15 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
     return MaterialApp(
       title: 'Warnell VR Lab',
       debugShowCheckedModeBanner: false,
+      //builds the app with the font scale
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaler: TextScaler.linear(fontScale),
+          ),
+          child: child!,
+        );
+      },
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
@@ -142,6 +160,8 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
         '/settings': (context) => SettingsPage(
               isDarkMode: isDarkMode,
               onToggleTheme: toggleTheme,
+              fontScale: fontScale,
+              onChangeFontScale: updateFontScale,
             ),
       },
       //handles unknown routes and displays a simple page not found message
