@@ -4,7 +4,10 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../widgets/lazy_image.dart';
 import '../../widgets/theme_toggle_button.dart';
 
+//hyperlinks
 const String youtubeChannelUrl = 'https://www.youtube.com/@warnellvrlab';
+const String vrCheckoutFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLScW3RJlXfUuNiWHifQgQZdld7Q4p0t0hceFo1n5-zgMY8RBkg/viewform?usp=header';
+const String vrCheckinFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdFWFjoDly9Bu8waKSgZOEy41RW_f5XkFOXEXo04Qdkmxm1iA/viewform?pli=1';
 
 //creates the VR Materials page of the app
 class VRMaterials extends StatelessWidget {
@@ -88,18 +91,61 @@ class VRMaterials extends StatelessWidget {
                 },
                 //icon and label to display on the button
                 icon: const Icon(Icons.play_circle_fill_rounded),
-                label: const Text('Visit the YouTube channel'),
+                label: const Text('Visit the YouTube channel!'),
               ),
 
-              //description of VR headset checkout form and supplemental materials
+              //description of VR headset checkout form
               const SizedBox(height: 25),
               const Text(
-                "You can also check out VR headsets for yourself or a group of people using the checkout form and supplemental documents below.",
+                "You can also check out VR headsets for yourself or a group of people using the check-out form below.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
                   height: 1.6,
                 ),
+              ),
+
+              //VR headset checkout form hyperlink will open in an external browser when pressed
+              const SizedBox(height: 18),
+              TextButton.icon(
+                //button opens VR headset checkout form in external browser
+                onPressed: () async {
+                  final uri = Uri.parse(vrCheckoutFormUrl);
+                  //throws exception if URL cannot be launched
+                  if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+                    throw Exception('Could not launch $uri');
+                    }
+                },
+                //icon and label to display on the button
+                icon: const Icon(Icons.headset_rounded),
+                label: const Text('Visit the VR Check-out Form'),
+              ),
+
+              //description of VR headset checkin form
+              const SizedBox(height: 25),
+              const Text(
+                "Remember to fill out the check-in form when you return the headsets!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  height: 1.6,
+                ),
+              ),
+
+              //VR headset checkin form hyperlink will open in an external browser when pressed
+              const SizedBox(height: 18),
+              TextButton.icon(
+                //button opens VR headset checkin form in external browser
+                onPressed: () async {
+                  final uri = Uri.parse(vrCheckinFormUrl);
+                  //throws exception if URL cannot be launched
+                  if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+                    throw Exception('Could not launch $uri');
+                    }
+                },
+                //icon and label to display on the button
+                icon: const Icon(Icons.headset_off_rounded),
+                label: const Text('Visit the VR Check-in Form'),
               ),
 
               //description of VR history infographic from PMRC
