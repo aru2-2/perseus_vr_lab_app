@@ -74,7 +74,7 @@ class InternUpdates extends StatelessWidget {
 
                       //Coming soon message for description about Percy, the Warnell VR Lab robot
                       Text(
-                        "Coming Soon",
+                        "What's Next",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.w700,
@@ -155,6 +155,24 @@ class InternUpdates extends StatelessWidget {
                   height: 1.6,
                 ),
               ),
+
+
+              // Image of Joey speaking about the VR headsets to faculty
+              const SizedBox(height: 25),
+              const LazyImage(assetPath: 'lib/assets/images/perseus_uga_conference_discussion.JPG'),
+
+              const SizedBox(height: 25),
+              // Description of Joey informing faculty about the VR headsets
+              const Text(
+                "Here, the Warnell VR Lab interns discuss their work using VR headsets for forestry education with faculty and researchers at the 2025 PERSEUS Annual Meeting.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  height: 1.6,
+                ),
+              ),
+
+
 
               // Image of drone in the forest
               const SizedBox(height: 25),
