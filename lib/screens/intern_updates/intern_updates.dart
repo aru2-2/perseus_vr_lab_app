@@ -6,7 +6,29 @@ import '../../widgets/theme_toggle_button.dart';
 
 //creates the Intern Updates page of the app
 class InternUpdates extends StatelessWidget {
-  
+  static const List<_InternUpdateEntry> _entries = [
+    _InternUpdateEntry(
+      imagePath: 'lib/assets/images/perseus_whitehall_dbh_activity.JPG',
+      description:
+          'In this image, some of the PERSEUS Project interns are competing to identify the correct tree diameter using DBH measurements.',
+    ),
+    _InternUpdateEntry(
+      imagePath: 'lib/assets/images/perseus_uga_conference_discussion.JPG',
+      description:
+          'Here, the Warnell VR Lab interns discuss their work using VR headsets for forestry education with faculty and researchers at the 2025 PERSEUS Annual Meeting.',
+    ),
+    _InternUpdateEntry(
+      imagePath: 'lib/assets/images/perseus_drone_in_forest.JPG',
+      description:
+          'In the image above, the Warnell VR lab interns learn how to operate a drone that captures land cover data over Whitehall Forest.',
+    ),
+    _InternUpdateEntry(
+      imagePath: 'lib/assets/images/perseus_vr_camera_woods.jpeg',
+      description:
+          'This image showcases the 360-degree camera equipment used by the Warnell VR Lab interns to capture tree imagery at Whitehall Forest.',
+    ),
+  ];
+
   //toggles between light and dark mode
   final bool isDarkMode;
   final VoidCallback onToggleTheme;
@@ -142,71 +164,73 @@ class InternUpdates extends StatelessWidget {
 
 
               const SizedBox(height: 25),
-              // Image of Whitehall field day DBH activity for the interns
-              const LazyImage(assetPath: 'lib/assets/images/perseus_whitehall_dbh_activity.JPG'),
-
-              const SizedBox(height: 25),
-              // Description of the forest VR equipment image
-              const Text(
-                "In this image, some of the PERSEUS Project interns are competing to identify the correct tree diameter using DBH measurements.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  height: 1.6,
-                ),
-              ),
-
-
-              // Image of Joey speaking about the VR headsets to faculty
-              const SizedBox(height: 25),
-              const LazyImage(assetPath: 'lib/assets/images/perseus_uga_conference_discussion.JPG'),
-
-              const SizedBox(height: 25),
-              // Description of Joey informing faculty about the VR headsets
-              const Text(
-                "Here, the Warnell VR Lab interns discuss their work using VR headsets for forestry education with faculty and researchers at the 2025 PERSEUS Annual Meeting.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  height: 1.6,
-                ),
-              ),
-
-
-
-              // Image of drone in the forest
-              const SizedBox(height: 25),
-              const LazyImage(assetPath: 'lib/assets/images/perseus_drone_in_forest.JPG'),
-
-              const SizedBox(height: 25),
-              // Description of the drone in forest image
-              const Text(
-                "In the image above, the Warnell VR lab interns learn how to operate a drone that captures land cover data over Whitehall Forest.",             
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  height: 1.6,
-                ),
-              ),
-
-
-              const SizedBox(height: 25),
-              // Image of forest VR equipment
-              const LazyImage(assetPath: 'lib/assets/images/perseus_vr_camera_woods.jpeg'),
-
-              const SizedBox(height: 25),
-              // Description of the forest VR equipment image
-              const Text(
-                "This image showcases the 360-degree camera equipment used by the Warnell VR Lab interns to capture tree imagery at Whitehall Forest.",             
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  height: 1.6,
+              ...List.generate(
+                _entries.length,
+                (index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: _InternUpdateEntryCard(
+                    entry: _entries[index],
+                    isDark: isDark,
+                  ),
                 ),
               ),
 
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _InternUpdateEntry {
+  final String imagePath;
+  final String description;
+
+  const _InternUpdateEntry({
+    required this.imagePath,
+    required this.description,
+  });
+}
+
+class _InternUpdateEntryCard extends StatelessWidget {
+  final _InternUpdateEntry entry;
+  final bool isDark;
+
+  const _InternUpdateEntryCard({
+    required this.entry,
+    required this.isDark,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(
+          color: isDark ? AppColors.borderDark : AppColors.borderLight,
+          width: 1.2,
+        ),
+      ),
+      color: isDark ? AppColors.cardDark : AppColors.cardLight,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            LazyImage(assetPath: entry.imagePath),
+            const SizedBox(height: 16),
+            Text(
+              entry.description,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 17,
+                height: 1.6,
+                color: isDark ? AppColors.textDark : AppColors.textLight,
+              ),
+            ),
+          ],
         ),
       ),
     );
