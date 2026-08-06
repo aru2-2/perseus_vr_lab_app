@@ -72,6 +72,7 @@ class HomePage extends StatelessWidget {
               ),
               
               //individual buttons for the different screens of the app
+              //First: VR Materials
               const SizedBox(height: 16),
               CustomButton(
                 text: "VR Materials",
@@ -80,6 +81,7 @@ class HomePage extends StatelessWidget {
                   Navigator.pushNamed(context, "/vr_materials");
                 },
               ),
+              //Second: Posters and Publications
               const SizedBox(height: 12),
               CustomButton(
                 text: "Posters and Publications",
@@ -88,6 +90,7 @@ class HomePage extends StatelessWidget {
                   Navigator.pushNamed(context, "/posters_and_publications");
                 },
               ),
+              //Third: Intern Updates
               const SizedBox(height: 12),
               CustomButton(
                 text: "Intern Updates",
@@ -104,6 +107,8 @@ class HomePage extends StatelessWidget {
               //    Navigator.pushNamed(context, "/robot");
               //  },
               //)
+              //Fourth: Meet the Team
+              const SizedBox(height: 12),
               CustomButton(
                 text: "Meet the Team",
                 icon: Icons.group,
@@ -111,6 +116,7 @@ class HomePage extends StatelessWidget {
                   Navigator.pushNamed(context, "/meet_the_team");
                 },
               ),
+              //Fifth: Contact Form
               const SizedBox(height: 12),
               CustomButton(
                 text: "Contact Form",
