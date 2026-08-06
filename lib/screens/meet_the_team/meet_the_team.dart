@@ -57,8 +57,21 @@ class MeetTheTeam extends StatelessWidget {
                 ),
               ),
       
+
+              //bold PERSEUS acronym explained, taken from Warnell VR website
+              const SizedBox(height: 25),
+              const Text(
+                "PROMOTING ECONOMIC RESILIENCE AND SUSTAINABILITY OF EASTERN U.S. FORESTS",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  height: 1.6,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
               //image of PERSEUS logo
-              const SizedBox(height: 60),
+              const SizedBox(height: 40),
               const LazyImage(assetPath: 'lib/assets/images/perseus_logo.jpg'),
 
               //description of the PERSEUS Project, taken from Warnell VR website
@@ -69,8 +82,20 @@ class MeetTheTeam extends StatelessWidget {
                 " PERSEUS will allow land managers to make informed decisions that will affect the delivery, sustainability, and resilience of forest resources.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 15,
                   height: 1.6,
+                ),
+              ),
+
+              //italicized description of funding for the PERSEUS Project, taken from Warnell VR website
+              const SizedBox(height: 25),
+              const Text(
+                "This work is supported by the U.S. Department of Agriculture, National Institute of Food and Agriculture, Sustainable Agricultural Systems program, PERSEUS grant, #2023-68012-38992.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 12,
+                  height: 1.6,
+                  fontStyle: FontStyle.italic,
                 ),
               ),
               
