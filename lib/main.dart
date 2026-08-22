@@ -5,8 +5,6 @@ import 'screens/vr_materials/vr_materials.dart';
 import 'screens/posters_and_publications/posters_and_publications.dart';
 import 'screens/intern_updates/intern_updates.dart';
 import 'screens/contact_form/contact_form.dart';
-//import 'screens/robot/robot.dart';
-import 'screens/meet_the_team/meet_the_team.dart';
 import 'screens/settings/settings_page.dart';
 import 'utils/colors.dart';
 
@@ -155,14 +153,6 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
               isDarkMode: isDarkMode,
               onToggleTheme: toggleTheme,
             ),
-            //'/robot': (context) => Robot(
-        //      isDarkMode: isDarkMode,
-        //      onToggleTheme: toggleTheme,
-        //  ),
-        '/meet_the_team': (context) => MeetTheTeam(
-              isDarkMode: isDarkMode,
-              onToggleTheme: toggleTheme,
-            ), //MeetTheTeam
         '/contact_form': (context) => ContactFormPage(
               isDarkMode: isDarkMode,
               onToggleTheme: toggleTheme,
