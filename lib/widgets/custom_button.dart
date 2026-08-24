@@ -1,6 +1,5 @@
 //import statements
 import 'package:flutter/material.dart';
-import '../utils/colors.dart';
 
 //creates custom button widgets across the app with a consistent style and behavior
 class CustomButton extends StatefulWidget {
@@ -20,12 +19,16 @@ class CustomButton extends StatefulWidget {
   State<CustomButton> createState() => _CustomButtonState();
 }
 
+//CustomButton class
 class _CustomButtonState extends State<CustomButton> {
   bool _isPressed = false;
 
 //builds the CustomButton widget with specified text, icon, and onPressed callback
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    //animated button changes appearance when pressed for better user experience
     return AnimatedScale(
       duration: const Duration(milliseconds: 140),
       scale: _isPressed ? 0.97 : 1.0,
@@ -54,8 +57,8 @@ class _CustomButtonState extends State<CustomButton> {
             child: Ink(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                gradient: const LinearGradient(
-                  colors: [AppColors.primary, AppColors.secondary],
+                gradient: LinearGradient(
+                  colors: [colorScheme.primary, colorScheme.secondary],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),
@@ -67,7 +70,7 @@ class _CustomButtonState extends State<CustomButton> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(widget.icon, size: 20, color: AppColors.buttonText),
+                    Icon(widget.icon, size: 20, color: colorScheme.onPrimary),
                     const SizedBox(width: 12),
                     Flexible(
                       child: Text(
@@ -75,11 +78,11 @@ class _CustomButtonState extends State<CustomButton> {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           letterSpacing: 0.2,
-                          color: AppColors.buttonText,
+                          color: colorScheme.onPrimary,
                         ),
                       ),
                     ),

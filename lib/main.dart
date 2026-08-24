@@ -27,7 +27,10 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
   bool isDarkMode = false;
   //displays default font size
   double fontScale = 1.0;
+  //provides stronger colors and boundaries for low-vision users
+  bool increaseContrast = false;
 
+  //updates the light/dark mode theme of the app based on user preference
   void toggleTheme() {
     setState(() {
       isDarkMode = !isDarkMode;
@@ -41,12 +44,20 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
     });
   }
 
+  //increases contrast of the app based on user selection
+  void toggleIncreaseContrast() {
+    setState(() {
+      increaseContrast = !increaseContrast;
+    });
+  }
+
   //build method that returns a widget
   //contains the title, debug banner, initial route, and defined routes for the different screens of the app
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Warnell VR Lab',
+
       debugShowCheckedModeBanner: false,
       //builds the app with the font scale
       builder: (context, child) {
@@ -57,6 +68,7 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
           child: child!,
         );
       },
+      //the explicit surface and text colors keep contrast predictable in both themes
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
@@ -64,9 +76,23 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.primary,
           brightness: Brightness.light,
+        ).copyWith(
+          primary: increaseContrast
+              ? AppColors.highContrastPrimary
+              : AppColors.primary,
+          secondary: increaseContrast
+              ? AppColors.highContrastSecondary
+              : AppColors.secondary,
+          onPrimary: AppColors.buttonText,
+          surface: AppColors.cardLight,
+          onSurface: AppColors.textLight,
+          onSurfaceVariant: AppColors.mutedTextLight,
+          outline: AppColors.borderLight,
         ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.primary,
+        appBarTheme: AppBarTheme(
+          backgroundColor: increaseContrast
+              ? AppColors.highContrastPrimary
+              : AppColors.primary,
           foregroundColor: AppColors.buttonText,
           elevation: 0,
         ),
@@ -78,7 +104,9 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
+            backgroundColor: increaseContrast
+              ? AppColors.highContrastPrimary
+              : AppColors.primary,
             foregroundColor: AppColors.buttonText,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             elevation: 2,
@@ -101,9 +129,23 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.primary,
           brightness: Brightness.dark,
+        ).copyWith(
+          primary: increaseContrast
+              ? AppColors.highContrastPrimary
+              : AppColors.primary,
+          secondary: increaseContrast
+              ? AppColors.highContrastSecondary
+              : AppColors.secondary,
+          onPrimary: AppColors.buttonText,
+          surface: AppColors.cardDark,
+          onSurface: AppColors.textDark,
+          onSurfaceVariant: AppColors.mutedTextDark,
+          outline: AppColors.borderDark,
         ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.primary,
+        appBarTheme: AppBarTheme(
+          backgroundColor: increaseContrast
+              ? AppColors.highContrastPrimary
+              : AppColors.primary,
           foregroundColor: AppColors.buttonText,
           elevation: 0,
         ),
@@ -115,7 +157,9 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
+            backgroundColor: increaseContrast
+              ? AppColors.highContrastPrimary
+              : AppColors.primary,
             foregroundColor: AppColors.buttonText,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             elevation: 2,
@@ -162,6 +206,8 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
               onToggleTheme: toggleTheme,
               fontScale: fontScale,
               onChangeFontScale: updateFontScale,
+              increaseContrast: increaseContrast,
+              onToggleIncreaseContrast: toggleIncreaseContrast,
             ),
       },
       //handles unknown routes and displays a simple page not found message

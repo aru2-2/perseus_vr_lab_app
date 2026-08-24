@@ -1,12 +1,15 @@
 //import statements
 import 'package:flutter/material.dart';
 
+//creates the Settings Page of the app
 class SettingsPage extends StatelessWidget {
   //variables for the features of the settings screen
   final bool isDarkMode;
   final VoidCallback onToggleTheme;
   final double fontScale;
   final ValueChanged<double> onChangeFontScale;
+  final bool increaseContrast;
+  final VoidCallback onToggleIncreaseContrast;
 
   const SettingsPage({
     super.key,
@@ -14,6 +17,8 @@ class SettingsPage extends StatelessWidget {
     required this.onToggleTheme,
     required this.fontScale,
     required this.onChangeFontScale,
+    required this.increaseContrast,
+    required this.onToggleIncreaseContrast,
   });
 
   //builds the settings page widget
@@ -36,7 +41,7 @@ class SettingsPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SwitchListTile(
-                  //switches between light and dark mode
+                  //toggle switches between light and dark mode
                   title: const Text('Theme'),
                   subtitle: Text(
                     isDark ? 'Dark mode is enabled' : 'Light mode is enabled',
@@ -61,9 +66,24 @@ class SettingsPage extends StatelessWidget {
                   label: '${fontScale.toStringAsFixed(1)}x',
                   onChanged: onChangeFontScale,
                 ),
+                //displays the current font size for the user
                 Text(
                   'Current size: ${fontScale.toStringAsFixed(1)}x',
                   style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                //toggle switches between standard and higher contrast for user comfort
+                const SizedBox(height: 16),
+                SwitchListTile(
+                  title: const Text('Contrast'),
+                  subtitle: Text(
+                    increaseContrast
+                        ? 'Higher contrast is enabled'
+                        : 'Standard contrast is enabled',
+                  ),
+                  value: increaseContrast,
+                  onChanged: (_) {
+                    onToggleIncreaseContrast();
+                  },
                 ),
               ],
             ),
