@@ -20,6 +20,26 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            //adds a thin border around the app icon so that it is easily visible
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Theme.of(context).colorScheme.secondary,
+                width: 1.5,
+              ),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            //places the app icon in the top left corner of the home page
+            padding: const EdgeInsets.all(2),
+            child: Image.asset(
+              'lib/assets/images/WarnellVRLabAppIcon.png',
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        //centers the title of the app in the center of the top banner
         title: const Text("Warnell VR Lab"),
         centerTitle: true,
         actions: [
@@ -27,7 +47,7 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.only(right: 8.0),
             //displays settings button on home page
             child: IconButton(
-              tooltip: 'Open settings',
+              tooltip: 'Open settings', //displays text when hovering over the settings icon
               icon: const Icon(Icons.settings),
               onPressed: () {
                 Navigator.pushNamed(context, '/settings');
@@ -50,7 +70,7 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        "Welcome to the Warnell VR Lab",
+                        "Welcome to the Warnell VR Lab!",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.w700,
