@@ -6,9 +6,8 @@ import '../../widgets/lazy_image.dart';
 import '../../widgets/theme_toggle_button.dart';
 
 //hyperlinks for external resources
-const String youtubeChannelUrl = 'https://www.youtube.com/@warnellvrlab';
+const String youtubeChannelUrl = 'https://www.youtube.com/@WarnellVRLab';
 const String vrCheckoutFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLScW3RJlXfUuNiWHifQgQZdld7Q4p0t0hceFo1n5-zgMY8RBkg/viewform?usp=header';
-const String vrCheckinFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdFWFjoDly9Bu8waKSgZOEy41RW_f5XkFOXEXo04Qdkmxm1iA/viewform?pli=1';
 const String vrHeadsetInstructions = 'https://drive.google.com/file/d/19xtkUkBc7KOkP2EGIz9adFN497YsOfJa/view';
 const String unityDevelopmentGuide = 'https://docs.google.com/document/d/17YXO3ov6evBGmPRMIyoop3esnh1T9jPAtCr4ibtvloI/edit?tab=t.0#heading=h.wbd25knfx8ig';
 const String mlcTechLending = 'https://www.libs.uga.edu/mlc/techlending';
@@ -30,23 +29,14 @@ class VRMaterials extends StatelessWidget {
     _VRMaterialsEntry(
       imagePath: 'lib/assets/images/perseus_faculty_vr_headsets.JPG',
       description:
-          'You can also check out VR headsets for yourself or a group of people using the check-out form below.',
+          'You can also check out VR headsets for yourself or a group of people using the check-out form above.',
       actionLabel: 'VR Check-out Form',
       actionUrl: vrCheckoutFormUrl,
       actionIcon: Icons.headset_rounded,
     ),
-    //VR headset checkin form
-    _VRMaterialsEntry(
-      imagePath: 'lib/assets/images/perseus_drlowe_vr_headset.JPG',
-      description:
-          'Remember to fill out the check-in form when you return the headsets!',
-      actionLabel: 'VR Check-in Form',
-      actionUrl: vrCheckinFormUrl,
-      actionIcon: Icons.headset_off_rounded,
-    ),
     //VR headset instructions
     _VRMaterialsEntry(
-      imagePath: 'lib/assets/images/perseus_drone_in_forest.JPG',
+      imagePath: 'lib/assets/images/perseus_drlowe_vr_headset.JPG',
       description:
           'This is a quick and easy instruction page on how to use the VR headsets.',
       actionLabel: 'VR Headset Instructions',
@@ -55,7 +45,7 @@ class VRMaterials extends StatelessWidget {
     ),
     //Unity development guide
     _VRMaterialsEntry(
-      imagePath: 'lib/assets/images/perseus_drone_in_forest.JPG',
+      imagePath: 'lib/assets/images/perseus_vrlab_demonstration.jpg',
       description:
           'If you want to create your own VR videos, read this guide to get started!',
       actionLabel: 'Unity Development Guide',
