@@ -1,5 +1,5 @@
 name: perseus_vr_lab_app
-description: "A new Flutter project."
+description: "Warnell VR Lab App for the PERSEUS Project"
 publish_to: 'none'
 version: 0.1.0+1
 
@@ -9,7 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  google_fonts: ^8.2.1
+  url_launcher: ^6.3.1
   visibility_detector: ^0.4.0
+
 
 dev_dependencies:
   flutter_test:

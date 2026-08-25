@@ -4,7 +4,8 @@ import 'screens/home/home_page.dart';
 import 'screens/vr_materials/vr_materials.dart';
 import 'screens/posters_and_publications/posters_and_publications.dart';
 import 'screens/intern_updates/intern_updates.dart';
-import 'screens/robot/robot.dart';
+import 'screens/contact_form/contact_form.dart';
+import 'screens/settings/settings_page.dart';
 import 'utils/colors.dart';
 
 void main() {
@@ -19,12 +20,34 @@ class WarnellVRLab extends StatefulWidget {
   State<WarnellVRLab> createState() => _WarnellVRLabState();
 }
 
+//state class for the main class
+//controls the toggle between light mode and dark mode as well as defines the routes for the different screens of the app
 class _WarnellVRLabState extends State<WarnellVRLab> {
+  //controls the toggle between light mode and dark mode
   bool isDarkMode = false;
+  //displays default font size
+  double fontScale = 1.0;
+  //provides stronger colors and boundaries for low-vision users
+  bool increaseContrast = false;
 
+  //updates the light/dark mode theme of the app based on user preference
   void toggleTheme() {
     setState(() {
       isDarkMode = !isDarkMode;
+    });
+  }
+
+  //updates the font scale based on user selection
+  void updateFontScale(double newScale) {
+    setState(() {
+      fontScale = newScale;
+    });
+  }
+
+  //increases contrast of the app based on user selection
+  void toggleIncreaseContrast() {
+    setState(() {
+      increaseContrast = !increaseContrast;
     });
   }
 
@@ -34,43 +57,122 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Warnell VR Lab',
+
       debugShowCheckedModeBanner: false,
+      //builds the app with the font scale
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaler: TextScaler.linear(fontScale),
+          ),
+          child: child!,
+        );
+      },
+      //the explicit surface and text colors keep contrast predictable in both themes
       theme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.light,
         scaffoldBackgroundColor: AppColors.backgroundLight,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.primary,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+          brightness: Brightness.light,
+        ).copyWith(
+          primary: increaseContrast
+              ? AppColors.highContrastPrimary
+              : AppColors.primary,
+          secondary: increaseContrast
+              ? AppColors.highContrastSecondary
+              : AppColors.secondary,
+          onPrimary: AppColors.buttonText,
+          surface: AppColors.cardLight,
+          onSurface: AppColors.textLight,
+          onSurfaceVariant: AppColors.mutedTextLight,
+          outline: AppColors.borderLight,
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: increaseContrast
+              ? AppColors.highContrastPrimary
+              : AppColors.primary,
           foregroundColor: AppColors.buttonText,
+          elevation: 0,
+        ),
+        cardTheme: const CardThemeData(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(18)),
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
+            backgroundColor: increaseContrast
+              ? AppColors.highContrastPrimary
+              : AppColors.primary,
             foregroundColor: AppColors.buttonText,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
           ),
         ),
         textTheme: const TextTheme(
           bodyLarge: TextStyle(color: AppColors.textLight),
           bodyMedium: TextStyle(color: AppColors.textLight),
           titleLarge: TextStyle(color: AppColors.textLight),
+          headlineMedium: TextStyle(color: AppColors.textLight),
         ),
       ),
       darkTheme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.dark,
         scaffoldBackgroundColor: AppColors.backgroundDark,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.primary,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+          brightness: Brightness.dark,
+        ).copyWith(
+          primary: increaseContrast
+              ? AppColors.highContrastPrimary
+              : AppColors.primary,
+          secondary: increaseContrast
+              ? AppColors.highContrastSecondary
+              : AppColors.secondary,
+          onPrimary: AppColors.buttonText,
+          surface: AppColors.cardDark,
+          onSurface: AppColors.textDark,
+          onSurfaceVariant: AppColors.mutedTextDark,
+          outline: AppColors.borderDark,
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: increaseContrast
+              ? AppColors.highContrastPrimary
+              : AppColors.primary,
           foregroundColor: AppColors.buttonText,
+          elevation: 0,
+        ),
+        cardTheme: const CardThemeData(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(18)),
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
+            backgroundColor: increaseContrast
+              ? AppColors.highContrastPrimary
+              : AppColors.primary,
             foregroundColor: AppColors.buttonText,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
           ),
         ),
         textTheme: const TextTheme(
           bodyLarge: TextStyle(color: AppColors.textDark),
           bodyMedium: TextStyle(color: AppColors.textDark),
           titleLarge: TextStyle(color: AppColors.textDark),
+          headlineMedium: TextStyle(color: AppColors.textDark),
         ),
       ),
       themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
@@ -83,11 +185,32 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
               isDarkMode: isDarkMode,
               onToggleTheme: toggleTheme,
             ),
-        '/vr_materials': (context) => const VRMaterials(),
-        '/posters_and_publications': (context) => const PostersAndPublications(),
-        '/intern_updates': (context) => const InternUpdates(),
-        '/robot': (context) => const Robot(),
+        '/vr_materials': (context) => VRMaterials(
+              isDarkMode: isDarkMode,
+              onToggleTheme: toggleTheme,
+            ),
+        '/posters_and_publications': (context) => PostersAndPublications(
+              isDarkMode: isDarkMode,
+              onToggleTheme: toggleTheme,
+            ),
+        '/intern_updates': (context) => InternUpdates(
+              isDarkMode: isDarkMode,
+              onToggleTheme: toggleTheme,
+            ),
+        '/contact_form': (context) => ContactFormPage(
+              isDarkMode: isDarkMode,
+              onToggleTheme: toggleTheme,
+            ),
+        '/settings': (context) => SettingsPage(
+              isDarkMode: isDarkMode,
+              onToggleTheme: toggleTheme,
+              fontScale: fontScale,
+              onChangeFontScale: updateFontScale,
+              increaseContrast: increaseContrast,
+              onToggleIncreaseContrast: toggleIncreaseContrast,
+            ),
       },
+      //handles unknown routes and displays a simple page not found message
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
           builder: (context) => const Scaffold(
