@@ -100,6 +100,10 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
           elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(18)),
+            side: BorderSide(
+              color: AppColors.borderLight,
+              width: 1.2,
+            ),
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -153,6 +157,10 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
           elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(18)),
+            side: BorderSide(
+              color: AppColors.borderDark,
+              width: 1.2,
+            ),
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(

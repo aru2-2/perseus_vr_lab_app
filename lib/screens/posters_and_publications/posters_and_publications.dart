@@ -124,6 +124,8 @@ class _TimelineEntryRow extends StatelessWidget {
   //builds the widget including visual elements of the timeline on the screen
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 24.0),
       child: Row(
@@ -157,6 +159,10 @@ class _TimelineEntryRow extends StatelessWidget {
               elevation: 3,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
+                side: BorderSide(
+                  color: colorScheme.outline,
+                  width: 1.2,
+                ),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),

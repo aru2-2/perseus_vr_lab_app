@@ -144,6 +144,20 @@ class _ContactFormPageState extends State<ContactFormPage> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final outline = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(
+        color: Theme.of(context).colorScheme.outline,
+        width: 1.2,
+      ),
+    );
+    final focusedOutline = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(
+        color: Theme.of(context).colorScheme.primary,
+        width: 2,
+      ),
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -177,10 +191,13 @@ class _ContactFormPageState extends State<ContactFormPage> {
                   const SizedBox(height: 20),
                   TextFormField(
                     controller: _nameController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Your name',
-                      prefixIcon: Icon(Icons.person_outline),
-                      border: OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.person_outline),
+                      enabledBorder: outline,
+                      focusedBorder: focusedOutline,
+                      errorBorder: outline,
+                      focusedErrorBorder: focusedOutline,
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
@@ -193,10 +210,13 @@ class _ContactFormPageState extends State<ContactFormPage> {
                   TextFormField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Email address',
-                      prefixIcon: Icon(Icons.email_outlined),
-                      border: OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.email_outlined),
+                      enabledBorder: outline,
+                      focusedBorder: focusedOutline,
+                      errorBorder: outline,
+                      focusedErrorBorder: focusedOutline,
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
@@ -212,11 +232,14 @@ class _ContactFormPageState extends State<ContactFormPage> {
                   TextFormField(
                     controller: _messageController,
                     maxLines: 6,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Your message',
                       alignLabelWithHint: true,
-                      prefixIcon: Icon(Icons.message_outlined),
-                      border: OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.message_outlined),
+                      enabledBorder: outline,
+                      focusedBorder: focusedOutline,
+                      errorBorder: outline,
+                      focusedErrorBorder: focusedOutline,
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
