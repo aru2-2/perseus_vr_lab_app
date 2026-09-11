@@ -42,7 +42,7 @@ class VRMaterials extends StatelessWidget {
           'Remember to check the VR headsets in after you are done using them using the link above!',
       actionLabel: 'VR Check-In Form',
       actionUrl: vrCheckinFormUrl,
-      actionIcon: Icons.headset_rounded,
+      actionIcon: Icons.headset_off,
     ),
     //VR headset instructions
     _VRMaterialsEntry(

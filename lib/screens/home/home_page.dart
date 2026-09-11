@@ -20,28 +20,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       /* leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            //adds a thin border around the app icon so that it is easily visible
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Color(0xFFC5D1C8),
-                //color: Theme.of(context).colorScheme.surface,
-                width: 1.5,
-              ),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            //places the app icon in the top left corner of the home page
-            padding: const EdgeInsets.all(2),
-            child: Image.asset(
-              'lib/assets/images/WarnellVRLabAppIcon.png',
-              fit: BoxFit.contain,
-            ),
-          ),
-        ),
-        */
-
+        //adds the app icon to the top left corner of the home page and forms a border so it is easily visible
         leading: Padding(
           padding: const EdgeInsets.all(6),
           child: Container(
@@ -64,7 +43,7 @@ class HomePage extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(2.5),
               child: Image.asset(
-                'lib/assets/images/WarnellVRLabAppIcon.png',
+                'lib/assets/WarnellVRLabAppIcon.png',
                 fit: BoxFit.cover,
               ),
             ),
