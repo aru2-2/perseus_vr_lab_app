@@ -115,7 +115,7 @@ class _ContactFormPageState extends State<ContactFormPage> {
       'Message:\n$message',
     );
 
-    final uri = Uri.parse('mailto:Arushi.Saravanan@uga.edu?subject=$subject&body=$body');
+    final uri = Uri.parse('mailto:WarnellVRLab@uga.edu?subject=$subject&body=$body');
 
   //opens the user's default email app with their feedback message
     try {

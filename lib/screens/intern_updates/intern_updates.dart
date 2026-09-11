@@ -6,7 +6,13 @@ import '../../widgets/theme_toggle_button.dart';
 
 //creates the Intern Updates page of the app
 class InternUpdates extends StatelessWidget {
+  //entries include an image and description for audience
   static const List<_InternUpdateEntry> _entries = [
+    _InternUpdateEntry(
+      imagePath: 'lib/assets/images/perseus_uga_internsandteam_picture_spring2026.JPG',
+      description:
+          'A new cohort of PERSEUS Project interns pose for a picture with other interns and faculty at the Warnell School of Forestry and Natural Resources at UGA.',
+    ),
     _InternUpdateEntry(
       imagePath: 'lib/assets/images/perseus_whitehall_dbh_activity.JPG',
       description:
@@ -201,7 +207,7 @@ class InternUpdates extends StatelessWidget {
                 " PERSEUS will allow land managers to make informed decisions that will affect the delivery, sustainability, and resilience of forest resources.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 12,
                   height: 1.6,
                 ),
               ),

@@ -20,13 +20,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Padding(
+       /* leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
             //adds a thin border around the app icon so that it is easily visible
             decoration: BoxDecoration(
               border: Border.all(
-                color: Theme.of(context).colorScheme.secondary,
+                color: Color(0xFFC5D1C8),
+                //color: Theme.of(context).colorScheme.surface,
                 width: 1.5,
               ),
               borderRadius: BorderRadius.circular(4),
@@ -39,6 +40,37 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
+        */
+
+        leading: Padding(
+          padding: const EdgeInsets.all(6),
+          child: Container(
+            padding: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.secondary,
+                width: 1.5,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.18),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(2.5),
+              child: Image.asset(
+                'lib/assets/images/WarnellVRLabAppIcon.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+
         //centers the title of the app in the center of the top banner
         title: const Text("Warnell VR Lab"),
         centerTitle: true,
@@ -70,7 +102,7 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        "Welcome to the Warnell VR Lab!",
+                        "Welcome to the \nWarnell VR Lab App!",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.w700,

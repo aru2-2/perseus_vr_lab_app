@@ -7,7 +7,8 @@ import '../../widgets/theme_toggle_button.dart';
 
 //hyperlinks for external resources
 const String youtubeChannelUrl = 'https://www.youtube.com/@WarnellVRLab';
-const String vrCheckoutFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLScW3RJlXfUuNiWHifQgQZdld7Q4p0t0hceFo1n5-zgMY8RBkg/viewform?usp=header';
+const String vrCheckoutFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSczlmjWR9WZeJu-SJzufCETgeqrC2-gU7B_6HZZJofyumIeWQ/viewform';
+const String vrCheckinFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdpK4aRR7R1pVP2lI6Gv5Z4A0ME21gg-Ziuh4Gd0lwxkBkIbw/viewform';
 const String vrHeadsetInstructions = 'https://drive.google.com/file/d/19xtkUkBc7KOkP2EGIz9adFN497YsOfJa/view';
 const String unityDevelopmentGuide = 'https://docs.google.com/document/d/17YXO3ov6evBGmPRMIyoop3esnh1T9jPAtCr4ibtvloI/edit?tab=t.0#heading=h.wbd25knfx8ig';
 const String mlcTechLending = 'https://www.libs.uga.edu/mlc/techlending';
@@ -30,8 +31,17 @@ class VRMaterials extends StatelessWidget {
       imagePath: 'lib/assets/images/perseus_faculty_vr_headsets.JPG',
       description:
           'You can also check out VR headsets for yourself or a group of people using the check-out form above.',
-      actionLabel: 'VR Check-out Form',
+      actionLabel: 'VR Check-Out Form',
       actionUrl: vrCheckoutFormUrl,
+      actionIcon: Icons.headset_rounded,
+    ),
+    //VR headset checkin form
+    _VRMaterialsEntry(
+      imagePath: 'lib/assets/images/perseus_uga_conference_vr_testing.JPG',
+      description:
+          'Remember to check the VR headsets in after you are done using them using the link above!',
+      actionLabel: 'VR Check-In Form',
+      actionUrl: vrCheckinFormUrl,
       actionIcon: Icons.headset_rounded,
     ),
     //VR headset instructions
