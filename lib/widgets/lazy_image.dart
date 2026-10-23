@@ -25,6 +25,8 @@ class _LazyImageState extends State<LazyImage> {
 //builds the LazyImage widget with specified asset path and height, and handles visibility detection for lazy loading
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return VisibilityDetector(
       //if the image is visible, it will load the image, otherwise it will show a placeholder
       key: Key(widget.assetPath),
@@ -44,19 +46,26 @@ class _LazyImageState extends State<LazyImage> {
           child: _isVisible
               ? Image.asset(
                   widget.assetPath,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
+                  alignment: Alignment.center,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
-                      color: Colors.grey[300],
+                      color: colorScheme.surfaceContainerHighest,
                       alignment: Alignment.center,
-                      child: const Text('Image unavailable'),
+                      child: Text(
+                        'Image unavailable',
+                        style: TextStyle(color: colorScheme.onSurfaceVariant),
+                      ),
                     );
                   },
                 )
               : Container(
-                  color: Colors.grey[200],
+                  color: colorScheme.surfaceContainerHighest,
                   alignment: Alignment.center,
-                  child: const Text('Loading image...'),
+                  child: Text(
+                    'Loading image...',
+                    style: TextStyle(color: colorScheme.onSurfaceVariant),
+                  ),
                 ),
         ),
       ),

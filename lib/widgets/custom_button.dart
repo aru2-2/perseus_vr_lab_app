@@ -1,5 +1,6 @@
 //import statements
 import 'package:flutter/material.dart';
+import '../utils/colors.dart';
 
 //creates custom button widgets across the app with a consistent style and behavior
 class CustomButton extends StatefulWidget {
@@ -57,8 +58,12 @@ class _CustomButtonState extends State<CustomButton> {
             child: Ink(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                gradient: LinearGradient(
-                  colors: [colorScheme.primary, colorScheme.secondary],
+                gradient: const LinearGradient(
+                  colors: [
+                    AppColors.deepForest,
+                    AppColors.forestGradientMiddle,
+                    AppColors.forestGradientEnd,
+                  ],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),

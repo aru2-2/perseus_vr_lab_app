@@ -7,10 +7,14 @@ import '../../widgets/theme_toggle_button.dart';
 
 //hyperlinks for external resources
 const String youtubeChannelUrl = 'https://www.youtube.com/@WarnellVRLab';
-const String vrCheckoutFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSczlmjWR9WZeJu-SJzufCETgeqrC2-gU7B_6HZZJofyumIeWQ/viewform';
-const String vrCheckinFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdpK4aRR7R1pVP2lI6Gv5Z4A0ME21gg-Ziuh4Gd0lwxkBkIbw/viewform';
-const String vrHeadsetInstructions = 'https://drive.google.com/file/d/19xtkUkBc7KOkP2EGIz9adFN497YsOfJa/view';
-const String unityDevelopmentGuide = 'https://docs.google.com/document/d/17YXO3ov6evBGmPRMIyoop3esnh1T9jPAtCr4ibtvloI/edit?tab=t.0#heading=h.wbd25knfx8ig';
+const String vrCheckoutFormUrl =
+    'https://docs.google.com/forms/d/e/1FAIpQLSczlmjWR9WZeJu-SJzufCETgeqrC2-gU7B_6HZZJofyumIeWQ/viewform';
+const String vrCheckinFormUrl =
+    'https://docs.google.com/forms/d/e/1FAIpQLSdpK4aRR7R1pVP2lI6Gv5Z4A0ME21gg-Ziuh4Gd0lwxkBkIbw/viewform';
+const String vrHeadsetInstructions =
+    'https://drive.google.com/file/d/19xtkUkBc7KOkP2EGIz9adFN497YsOfJa/view';
+const String unityDevelopmentGuide =
+    'https://docs.google.com/document/d/17YXO3ov6evBGmPRMIyoop3esnh1T9jPAtCr4ibtvloI/edit?tab=t.0#heading=h.wbd25knfx8ig';
 const String mlcTechLending = 'https://www.libs.uga.edu/mlc/techlending';
 
 //creates the VR Materials page of the app
@@ -63,7 +67,7 @@ class VRMaterials extends StatelessWidget {
       actionIcon: Icons.book_rounded,
     ),
     //MLC tech lending policy
-    _VRMaterialsEntry(  
+    _VRMaterialsEntry(
       imagePath: 'lib/assets/images/perseus_drone_in_forest.JPG',
       description:
           'At UGA, our VR headsets are subject to the technology lending policy set by the Miller Learning Center (MLC). Check it out here.',
@@ -110,10 +114,7 @@ class VRMaterials extends StatelessWidget {
               const Text(
                 "VR Materials",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
 
               const SizedBox(height: 25),
@@ -121,10 +122,7 @@ class VRMaterials extends StatelessWidget {
               const Text(
                 "This page houses a collection of resources and materials related to the Warnell VR Lab. ",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  height: 1.6,
-                ),
+                style: TextStyle(fontSize: 18, height: 1.6),
               ),
 
               const SizedBox(height: 25),
@@ -140,7 +138,7 @@ class VRMaterials extends StatelessWidget {
                   ),
                 ),
               ),
-            ]
+            ],
           ),
         ),
       ),
@@ -170,10 +168,7 @@ class _VRMaterialsResourceCard extends StatelessWidget {
   final _VRMaterialsEntry entry;
   final bool isDark;
 
-  const _VRMaterialsResourceCard({
-    required this.entry,
-    required this.isDark,
-  });
+  const _VRMaterialsResourceCard({required this.entry, required this.isDark});
 
   //builds the card widget that is used for each entry
   @override
@@ -208,22 +203,24 @@ class _VRMaterialsResourceCard extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: isDark
-                        ? const Color(0xFF24312A)
-                        : const Color(0xFFF2F7F0),
+                        ? AppColors.forestGradientMiddle
+                        : AppColors.mutedLeaf,
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: TextButton.icon(
                     onPressed: () async {
                       final uri = Uri.parse(entry.actionUrl);
                       if (!await launchUrl(
-                          uri,
-                          mode: LaunchMode.externalApplication)) {
+                        uri,
+                        mode: LaunchMode.externalApplication,
+                      )) {
                         throw Exception('Could not launch $uri');
                       }
                     },
                     style: TextButton.styleFrom(
-                      foregroundColor:
-                          isDark ? AppColors.textDark : AppColors.textLight,
+                      foregroundColor: isDark
+                          ? AppColors.textDark
+                          : AppColors.textLight,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 14,
                         vertical: 10,
