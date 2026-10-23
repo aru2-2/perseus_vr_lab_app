@@ -88,7 +88,10 @@ class InternUpdates extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           gradient: const LinearGradient(
-                            colors: [AppColors.primary, AppColors.secondary],
+                            colors: [
+                              AppColors.deepForest,
+                              AppColors.forestGradientEnd,
+                            ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
@@ -125,7 +128,9 @@ class InternUpdates extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         decoration: BoxDecoration(
-                          color: isDark ? const Color(0xFF24312A) : const Color(0xFFF2F7F0),
+                          color: isDark
+                              ? AppColors.forestGradientMiddle
+                              : AppColors.mutedLeaf,
                           borderRadius: BorderRadius.circular(16),
                         ),
                         
