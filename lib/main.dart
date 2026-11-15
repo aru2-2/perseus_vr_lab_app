@@ -199,26 +199,12 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
 
       //defines the routes for the different screens of the app
       routes: {
-        '/': (context) => HomePage(
-              isDarkMode: isDarkMode,
-              onToggleTheme: toggleTheme,
-            ),
-        '/vr_materials': (context) => VRMaterials(
-              isDarkMode: isDarkMode,
-              onToggleTheme: toggleTheme,
-            ),
-        '/posters_and_publications': (context) => PostersAndPublications(
-              isDarkMode: isDarkMode,
-              onToggleTheme: toggleTheme,
-            ),
-        '/intern_updates': (context) => InternUpdates(
-              isDarkMode: isDarkMode,
-              onToggleTheme: toggleTheme,
-            ),
-        '/contact_form': (context) => ContactFormPage(
-              isDarkMode: isDarkMode,
-              onToggleTheme: toggleTheme,
-            ),
+        '/': (context) => const HomePage(),
+        '/vr_materials': (context) => const VRMaterials(),
+        '/posters_and_publications': (context) =>
+            const PostersAndPublications(),
+        '/intern_updates': (context) => const InternUpdates(),
+        '/contact_form': (context) => const ContactFormPage(),
         '/settings': (context) => SettingsPage(
               isDarkMode: isDarkMode,
               onToggleTheme: toggleTheme,

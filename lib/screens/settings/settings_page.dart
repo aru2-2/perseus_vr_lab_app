@@ -24,13 +24,10 @@ class SettingsPage extends StatelessWidget {
   //builds the settings page widget
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isDark = isDarkMode;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Settings'), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Card(

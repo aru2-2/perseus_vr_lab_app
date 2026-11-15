@@ -1,9 +1,10 @@
 //import statements
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../utils/colors.dart';
 import '../../widgets/lazy_image.dart';
-import '../../widgets/theme_toggle_button.dart';
+import '../../widgets/settings_button.dart';
 
 //hyperlinks for external resources
 const String youtubeChannelUrl = 'https://www.youtube.com/@WarnellVRLab';
@@ -77,15 +78,7 @@ class VRMaterials extends StatelessWidget {
     ),
   ];
 
-  //toggles between light and dark mode
-  final bool isDarkMode;
-  final VoidCallback onToggleTheme;
-
-  const VRMaterials({
-    super.key,
-    required this.isDarkMode,
-    required this.onToggleTheme,
-  });
+  const VRMaterials({super.key});
 
   //builds the VR Materials page widget
   @override
@@ -98,10 +91,7 @@ class VRMaterials extends StatelessWidget {
         title: const Text("Warnell VR Lab"),
         centerTitle: true,
         actions: [
-          ThemeToggleButton(
-            isDarkMode: isDarkMode,
-            onToggleTheme: onToggleTheme,
-          ),
+          const SettingsButton(),
         ],
       ),
       body: SingleChildScrollView(
@@ -170,6 +160,24 @@ class _VRMaterialsResourceCard extends StatelessWidget {
 
   const _VRMaterialsResourceCard({required this.entry, required this.isDark});
 
+  Future<void> _openResource(BuildContext context) async {
+    final uri = Uri.parse(entry.actionUrl);
+    try {
+      if (await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+        return;
+      }
+    } on PlatformException {
+      // Show the same message as a launch request that returns false.
+    } on MissingPluginException {
+      // The platform does not have a URL launcher implementation available.
+    }
+
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Couldn't open this link. Please try again.")),
+    );
+  }
+
   //builds the card widget that is used for each entry
   @override
   Widget build(BuildContext context) {
@@ -185,12 +193,7 @@ class _VRMaterialsResourceCard extends StatelessWidget {
       ),
       color: isDark ? AppColors.cardDark : AppColors.cardLight,
       child: InkWell(
-        onTap: () async {
-          final uri = Uri.parse(entry.actionUrl);
-          if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-            throw Exception('Could not launch $uri');
-          }
-        },
+        onTap: () => _openResource(context),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -208,15 +211,7 @@ class _VRMaterialsResourceCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: TextButton.icon(
-                    onPressed: () async {
-                      final uri = Uri.parse(entry.actionUrl);
-                      if (!await launchUrl(
-                        uri,
-                        mode: LaunchMode.externalApplication,
-                      )) {
-                        throw Exception('Could not launch $uri');
-                      }
-                    },
+                    onPressed: () => _openResource(context),
                     style: TextButton.styleFrom(
                       foregroundColor: isDark
                           ? AppColors.textDark

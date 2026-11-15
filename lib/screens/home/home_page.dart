@@ -1,19 +1,12 @@
 //import statements
 import 'package:flutter/material.dart';
 import '../../widgets/custom_button.dart';
+import '../../widgets/settings_button.dart';
 
 //main class for the home page
 class HomePage extends StatelessWidget {
   
-  //toggles between light and dark mode
-  final bool isDarkMode;
-  final VoidCallback onToggleTheme;
-
-  const HomePage({
-    super.key,
-    required this.isDarkMode,
-    required this.onToggleTheme,
-  });
+  const HomePage({super.key});
 
   //builds the home page widget
   @override
@@ -54,17 +47,7 @@ class HomePage extends StatelessWidget {
         title: const Text("Warnell VR Lab"),
         centerTitle: true,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            //displays settings button on home page
-            child: IconButton(
-              tooltip: 'Open settings', //displays text when hovering over the settings icon
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                Navigator.pushNamed(context, '/settings');
-              },
-            ),
-          ),
+          const SettingsButton(),
         ],
       ),
       body: SingleChildScrollView(

@@ -1,7 +1,7 @@
 //import statements
 import 'package:flutter/material.dart';
 import '../../widgets/lazy_image.dart';
-import '../../widgets/theme_toggle_button.dart';
+import '../../widgets/settings_button.dart';
 
 //creates the Posters and Publications page of the app
 class PostersAndPublications extends StatelessWidget {
@@ -33,15 +33,7 @@ class PostersAndPublications extends StatelessWidget {
     ),
   ];
 
-  //toggles between light and dark mode
-  final bool isDarkMode;
-  final VoidCallback onToggleTheme;
-
-  const PostersAndPublications({
-    super.key,
-    required this.isDarkMode,
-    required this.onToggleTheme,
-  });
+  const PostersAndPublications({super.key});
 
 //builds the Posters and Publications page widget
   @override
@@ -51,10 +43,7 @@ class PostersAndPublications extends StatelessWidget {
         title: const Text("Warnell VR Lab"),
         centerTitle: true,
         actions: [
-          ThemeToggleButton(
-            isDarkMode: isDarkMode,
-            onToggleTheme: onToggleTheme,
-          ),
+          const SettingsButton(),
         ],
       ),
       body: SingleChildScrollView(
@@ -128,80 +117,83 @@ class _TimelineEntryRow extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 24.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 36,
-            child: Column(
-              children: [
-                Container(
-                  width: 14,
-                  height: 14,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                if (!isLast)
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(
+              width: 36,
+              child: Column(
+                children: [
                   Container(
-                    width: 2,
-                    height: 300,
-                    margin: const EdgeInsets.only(top: 8),
-                    color: Theme.of(context).dividerColor,
+                    width: 14,
+                    height: 14,
+                    decoration: BoxDecoration(
+                      color: colorScheme.primary,
+                      shape: BoxShape.circle,
+                    ),
                   ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Card(
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-                side: BorderSide(
-                  color: colorScheme.outline,
-                  width: 1.2,
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      entry.year,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary,
+                  if (!isLast)
+                    Expanded(
+                      child: Container(
+                        width: 2,
+                        margin: const EdgeInsets.only(top: 8),
+                        color: Theme.of(context).dividerColor,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      entry.title,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    LazyImage(assetPath: entry.imagePath),
-                    const SizedBox(height: 16),
-                    Text(
-                      entry.description,
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(
-                        fontSize: 17,
-                        height: 1.6,
-                      ),
-                    ),
-                  ],
-                ),
+                ],
               ),
             ),
-          ),
-        ],
+            const SizedBox(width: 8),
+            Expanded(
+              child: Card(
+                elevation: 3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  side: BorderSide(
+                    color: colorScheme.outline,
+                    width: 1.2,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        entry.year,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.primary,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        entry.title,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      LazyImage(assetPath: entry.imagePath),
+                      const SizedBox(height: 16),
+                      Text(
+                        entry.description,
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                          fontSize: 17,
+                          height: 1.6,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

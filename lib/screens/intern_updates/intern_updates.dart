@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import '../../utils/colors.dart';
 import '../../widgets/lazy_image.dart';
-import '../../widgets/theme_toggle_button.dart';
+import '../../widgets/settings_button.dart';
 
 //creates the Intern Updates page of the app
 class InternUpdates extends StatelessWidget {
@@ -35,15 +35,7 @@ class InternUpdates extends StatelessWidget {
     ),
   ];
 
-  //toggles between light and dark mode
-  final bool isDarkMode;
-  final VoidCallback onToggleTheme;
-
-  const InternUpdates({
-    super.key,
-    required this.isDarkMode,
-    required this.onToggleTheme,
-  });
+  const InternUpdates({super.key});
 
 //builds the Intern Updates page widget
   @override
@@ -56,10 +48,7 @@ class InternUpdates extends StatelessWidget {
         title: const Text("Warnell VR Lab"),
         centerTitle: true,
         actions: [
-          ThemeToggleButton(
-            isDarkMode: isDarkMode,
-            onToggleTheme: onToggleTheme,
-          ),
+          const SettingsButton(),
         ],
       ),
       body: SingleChildScrollView(

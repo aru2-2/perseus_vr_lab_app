@@ -1,12 +1,16 @@
 //import statements
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:perseus_vr_lab_app/main.dart';
 import 'package:perseus_vr_lab_app/widgets/custom_button.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 //regression test ensures that unknown routes do not surface unhandled exceptions
 void main() {
-  testWidgets('unknown routes do not surface unhandled exceptions', (tester) async {
+  testWidgets('unknown routes do not surface unhandled exceptions', (
+    tester,
+  ) async {
     await tester.pumpWidget(const WarnellVRLab());
 
     //navigate to an unknown route and verify that no unhandled exceptions are thrown
@@ -20,7 +24,7 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-//regression test ensures that the settings button is available on each screen of the app
+  //regression test ensures that the settings button is available on each screen of the app
   testWidgets('settings button is available on each screen', (tester) async {
     await tester.pumpWidget(const WarnellVRLab());
 
@@ -30,7 +34,7 @@ void main() {
       '/vr_materials',
       '/posters_and_publications',
       '/intern_updates',
-      '/robot',
+      '/contact_form',
     ];
 
     //loop through each route and verify that the settings button is available on each screen
@@ -41,11 +45,64 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byTooltip('Open settings'), findsOneWidget);
+      expect(find.byTooltip('Switch to dark mode'), findsNothing);
+      expect(find.byTooltip('Switch to light mode'), findsNothing);
     }
   });
 
-//regression test ensures that the custom button handles long labels without overflow
-  testWidgets('custom button handles long labels without overflow', (tester) async {
+  testWidgets('theme can only be toggled from settings', (tester) async {
+    await tester.pumpWidget(const WarnellVRLab());
+
+    expect(find.byTooltip('Switch to dark mode'), findsNothing);
+    await tester.tap(find.byTooltip('Open settings'));
+    await tester.pumpAndSettle();
+
+    final themeSwitch = find.widgetWithText(SwitchListTile, 'Theme');
+    expect(tester.widget<SwitchListTile>(themeSwitch).value, isFalse);
+    await tester.tap(find.text('Light mode is enabled'));
+    await tester.pumpAndSettle();
+
+    expect(tester.widget<SwitchListTile>(themeSwitch).value, isTrue);
+    expect(find.text('Dark mode is enabled'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('failed resource links show a message instead of throwing', (
+    tester,
+  ) async {
+    VisibilityDetectorController.instance.updateInterval = Duration.zero;
+    addTearDown(
+      () => VisibilityDetectorController.instance.updateInterval =
+          const Duration(milliseconds: 500),
+    );
+
+    const launcherChannel = MethodChannel('plugins.flutter.io/url_launcher');
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(launcherChannel, (call) async => false);
+    addTearDown(
+      () => TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(launcherChannel, null),
+    );
+
+    await tester.pumpWidget(const WarnellVRLab());
+    final context = tester.element(find.text('Warnell VR Lab'));
+    Navigator.of(context).pushNamed('/vr_materials');
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Visit the YouTube channel'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text("Couldn't open this link. Please try again."),
+      findsOneWidget,
+    );
+    expect(tester.takeException(), isNull);
+  });
+
+  //regression test ensures that the custom button handles long labels without overflow
+  testWidgets('custom button handles long labels without overflow', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(360, 800);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(() {

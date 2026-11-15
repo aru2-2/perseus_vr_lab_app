@@ -3,18 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../utils/colors.dart';
 import '../../widgets/custom_button.dart';
-import '../../widgets/theme_toggle_button.dart';
+import '../../widgets/settings_button.dart';
 
 class ContactFormPage extends StatefulWidget {
-  //toggles between light and dark mode
-  final bool isDarkMode;
-  final VoidCallback onToggleTheme;
-
-  const ContactFormPage({
-    super.key,
-    required this.isDarkMode,
-    required this.onToggleTheme,
-  });
+  const ContactFormPage({super.key});
 
   @override
   State<ContactFormPage> createState() => _ContactFormPageState();
@@ -164,10 +156,7 @@ class _ContactFormPageState extends State<ContactFormPage> {
         title: const Text('Contact Form'),
         centerTitle: true,
         actions: [
-          ThemeToggleButton(
-            isDarkMode: widget.isDarkMode,
-            onToggleTheme: widget.onToggleTheme,
-          ),
+          const SettingsButton(),
         ],
       ),
       body: SingleChildScrollView(
