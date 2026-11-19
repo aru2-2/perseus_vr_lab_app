@@ -65,14 +65,31 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
           data: MediaQuery.of(context).copyWith(
             textScaler: TextScaler.linear(fontScale),
           ),
-          child: child!,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.asset(
+                'lib/assets/images/perseus_vr_camera_woods.jpeg',
+                fit: BoxFit.cover,
+                excludeFromSemantics: true,
+              ),
+              ColoredBox(
+                color: increaseContrast
+                    ? (isDarkMode ? AppColors.backgroundDark : AppColors.cream)
+                    : isDarkMode
+                        ? AppColors.backgroundDark.withValues(alpha: 0.82)
+                        : AppColors.cream.withValues(alpha: 0.84),
+              ),
+              child!,
+            ],
+          ),
         );
       },
       //the explicit surface and text colors keep contrast predictable in both themes
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
-        scaffoldBackgroundColor: AppColors.backgroundLight,
+        scaffoldBackgroundColor: Colors.transparent,
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.primary,
           brightness: Brightness.light,
@@ -134,7 +151,7 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
       darkTheme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: AppColors.backgroundDark,
+        scaffoldBackgroundColor: Colors.transparent,
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.primary,
           brightness: Brightness.dark,
