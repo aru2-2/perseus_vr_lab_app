@@ -41,9 +41,9 @@ class _ContactFormPageState extends State<ContactFormPage> {
       barrierDismissible: false,
       builder: (dialogContext) {
         return AlertDialog(
-          title: const Text('Feedback sent'),
+          title: const Text('Email draft opened'),
           content: const Text(
-            'Your message is ready in your email app. Choose what you would like to do next.',
+            'Your message is ready in your email app. Review it and send it from there.',
           ),
           actions: [
             TextButton(
@@ -177,7 +177,32 @@ class _ContactFormPageState extends State<ContactFormPage> {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
+                  //adds an informational message telling user that their message will open in an email client
                   const SizedBox(height: 20),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.open_in_new_rounded,
+                          size: 20,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        const SizedBox(width: 10),
+                        const Expanded(
+                          child: Text(
+                            'Note: Submitting a form opens your default email app with a draft of this message.',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
                   TextFormField(
                     controller: _nameController,
                     decoration: InputDecoration(
@@ -242,7 +267,7 @@ class _ContactFormPageState extends State<ContactFormPage> {
                   CustomButton(
                     text: _messagesSentThisSession >= _maxMessagesPerSession
                         ? 'Limit reached'
-                        : (_isSubmitting ? 'Sending…' : 'Send Feedback'),
+                        : (_isSubmitting ? 'Opening email…' : 'Open Email App'),
                     icon: Icons.send_rounded,
                     onPressed: _messagesSentThisSession >= _maxMessagesPerSession
                         ? _showLimitReachedMessage
