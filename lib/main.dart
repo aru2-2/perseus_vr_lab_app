@@ -113,7 +113,7 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
               surfaceContainerHighest: AppColors.mutedLeaf,
               onSurface: AppColors.textLight,
               onSurfaceVariant: AppColors.mutedTextLight,
-              outline: AppColors.borderLight,
+              outline: AppColors.forest,
             ),
         appBarTheme: AppBarTheme(
           backgroundColor: increaseContrast
@@ -158,13 +158,9 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
               seedColor: AppColors.primary,
               brightness: Brightness.dark,
             ).copyWith(
-              primary: increaseContrast
-                  ? AppColors.highContrastPrimary
-                  : AppColors.primary,
-              secondary: increaseContrast
-                  ? AppColors.highContrastSecondary
-                  : AppColors.secondary,
-              onPrimary: AppColors.buttonText,
+              primary: AppColors.mutedLeaf,
+              secondary: AppColors.mutedLeaf,
+              onPrimary: AppColors.deepForest,
               tertiary: AppColors.leaf,
               onTertiary: AppColors.deepForest,
               primaryContainer: AppColors.forestGradientMiddle,

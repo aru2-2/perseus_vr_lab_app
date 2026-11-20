@@ -9,6 +9,26 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 //regression test ensures that unknown routes do not surface unhandled exceptions
 void main() {
+  testWidgets('light, dark, and higher-contrast themes meet contrast targets', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const WarnellVRLab());
+
+    final appFinder = find.byType(MaterialApp);
+    var app = tester.widget<MaterialApp>(appFinder);
+    _expectThemeContrast(app.theme!.colorScheme);
+    _expectThemeContrast(app.darkTheme!.colorScheme);
+
+    await tester.tap(find.byTooltip('Open settings'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Standard contrast is enabled'));
+    await tester.pumpAndSettle();
+
+    app = tester.widget<MaterialApp>(appFinder);
+    _expectThemeContrast(app.theme!.colorScheme);
+    _expectThemeContrast(app.darkTheme!.colorScheme);
+  });
+
   testWidgets('contact form explains that it opens an email app', (
     tester,
   ) async {
@@ -271,4 +291,41 @@ void main() {
       }
     }
   });
+}
+
+void _expectThemeContrast(ColorScheme colorScheme) {
+  expect(
+    _contrastRatio(colorScheme.onSurface, colorScheme.surface),
+    greaterThanOrEqualTo(4.5),
+  );
+  expect(
+    _contrastRatio(colorScheme.onSurfaceVariant, colorScheme.surface),
+    greaterThanOrEqualTo(4.5),
+  );
+  expect(
+    _contrastRatio(colorScheme.primary, colorScheme.surface),
+    greaterThanOrEqualTo(4.5),
+  );
+  expect(
+    _contrastRatio(colorScheme.primary, colorScheme.surfaceContainerHighest),
+    greaterThanOrEqualTo(4.5),
+  );
+  expect(
+    _contrastRatio(colorScheme.onPrimary, colorScheme.primary),
+    greaterThanOrEqualTo(4.5),
+  );
+  expect(
+    _contrastRatio(colorScheme.outline, colorScheme.surface),
+    greaterThanOrEqualTo(3),
+  );
+  expect(
+    _contrastRatio(colorScheme.outline, colorScheme.surfaceContainerHighest),
+    greaterThanOrEqualTo(3),
+  );
+}
+
+double _contrastRatio(Color first, Color second) {
+  final luminances = [first.computeLuminance(), second.computeLuminance()]
+    ..sort();
+  return (luminances[1] + 0.05) / (luminances[0] + 0.05);
 }

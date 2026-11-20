@@ -28,8 +28,6 @@ class _CustomButtonState extends State<CustomButton> {
   //builds the CustomButton widget with specified text, icon, and onPressed callback
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return LayoutBuilder(
       builder: (context, constraints) {
         final isWide = constraints.maxWidth >= 600;
@@ -88,7 +86,7 @@ class _CustomButtonState extends State<CustomButton> {
                         Icon(
                           widget.icon,
                           size: accessibleIconSize(context, isWide ? 24 : 20),
-                          color: colorScheme.onPrimary,
+                          color: AppColors.buttonText,
                         ),
                         SizedBox(width: isWide ? 16 : 12),
                         Flexible(
@@ -100,7 +98,7 @@ class _CustomButtonState extends State<CustomButton> {
                                   fontSize: isWide ? 20 : 16,
                                   fontWeight: FontWeight.w600,
                                   letterSpacing: 0.2,
-                                  color: colorScheme.onPrimary,
+                                  color: AppColors.buttonText,
                                 ),
                           ),
                         ),
