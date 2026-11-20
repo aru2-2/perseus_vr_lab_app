@@ -3,11 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:perseus_vr_lab_app/main.dart';
+import 'package:perseus_vr_lab_app/screens/contact_form/contact_form.dart';
 import 'package:perseus_vr_lab_app/widgets/custom_button.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 //regression test ensures that unknown routes do not surface unhandled exceptions
 void main() {
+  testWidgets('contact form explains that it opens an email app', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const MaterialApp(home: ContactFormPage()));
+
+    expect(
+      find.text(
+        'Note: Submitting a form opens your default email app with a draft of this message.',
+      ),
+      findsOneWidget,
+    );
+    expect(find.text('Open Email App'), findsOneWidget);
+  });
+
   testWidgets('unknown routes do not surface unhandled exceptions', (
     tester,
   ) async {
@@ -99,6 +114,43 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets(
+    'Intern Updates website link shows an error when it cannot open',
+    (tester) async {
+      VisibilityDetectorController.instance.updateInterval = Duration.zero;
+      addTearDown(
+        () => VisibilityDetectorController.instance.updateInterval =
+            const Duration(milliseconds: 500),
+      );
+
+      const launcherChannel = MethodChannel('plugins.flutter.io/url_launcher');
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(launcherChannel, (call) async => false);
+      addTearDown(
+        () => TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+            .setMockMethodCallHandler(launcherChannel, null),
+      );
+
+      await tester.pumpWidget(const WarnellVRLab());
+      final context = tester.element(find.text('Warnell VR Lab'));
+      Navigator.of(context).pushNamed('/intern_updates');
+      await tester.pumpAndSettle();
+
+      expect(
+        find.text('Stay up to date with the Warnell VR Lab'),
+        findsOneWidget,
+      );
+      await tester.tap(find.text('Visit the VR Lab website'));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.text("Couldn't open this link. Please try again."),
+        findsOneWidget,
+      );
+      expect(tester.takeException(), isNull);
+    },
+  );
+
   //regression test ensures that the custom button handles long labels without overflow
   testWidgets('custom button handles long labels without overflow', (
     tester,
@@ -129,6 +181,23 @@ void main() {
 
     await tester.pump();
     expect(find.text('Posters and Publications'), findsOneWidget);
+    expect(tester.getSize(find.byType(CustomButton)).height, 58);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('custom button scales up on wide layouts', (tester) async {
+    tester.view.physicalSize = const Size(1024, 768);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+
+    await tester.pumpWidget(const WarnellVRLab());
+
+    final homeButton = find.byType(CustomButton).first;
+    expect(tester.getSize(homeButton).width, 752);
+    expect(tester.getSize(homeButton).height, 72);
     expect(tester.takeException(), isNull);
   });
 }

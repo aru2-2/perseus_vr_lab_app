@@ -69,7 +69,7 @@ class VRMaterials extends StatelessWidget {
     ),
     //MLC tech lending policy
     _VRMaterialsEntry(
-      imagePath: 'lib/assets/images/perseus_drone_in_forest.JPG',
+      imagePath: 'lib/assets/images/perseus_drone_smile.JPG',
       description:
           'At UGA, our VR headsets are subject to the technology lending policy set by the Miller Learning Center (MLC). Check it out here.',
       actionLabel: 'MLC Tech Lending Policy',

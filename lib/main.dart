@@ -65,6 +65,7 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
           data: MediaQuery.of(context).copyWith(
             textScaler: TextScaler.linear(fontScale),
           ),
+          //adds a forest photo to the app's background
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -73,6 +74,7 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
                 fit: BoxFit.cover,
                 excludeFromSemantics: true,
               ),
+              //keeps background dark with cream overlay so that viewers are not distracted from main contents
               ColoredBox(
                 color: increaseContrast
                     ? (isDarkMode ? AppColors.backgroundDark : AppColors.cream)

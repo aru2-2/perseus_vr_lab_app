@@ -1,15 +1,21 @@
 //import statements
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../utils/colors.dart';
 import '../../widgets/lazy_image.dart';
 import '../../widgets/settings_button.dart';
+
+const String warnellVrLabWebsiteUrl =
+    'https://sites.google.com/uga.edu/warnellvr/home';
 
 //creates the Intern Updates page of the app
 class InternUpdates extends StatelessWidget {
   //entries include an image and description for audience
   static const List<_InternUpdateEntry> _entries = [
     _InternUpdateEntry(
-      imagePath: 'lib/assets/images/perseus_uga_internsandteam_picture_spring2026.JPG',
+      imagePath:
+          'lib/assets/images/perseus_uga_internsandteam_picture_spring2026.JPG',
       description:
           'A new cohort of PERSEUS Project interns pose for a picture with other interns and faculty at the Warnell School of Forestry and Natural Resources at UGA.',
     ),
@@ -37,7 +43,29 @@ class InternUpdates extends StatelessWidget {
 
   const InternUpdates({super.key});
 
-//builds the Intern Updates page widget
+  Future<void> _openWebsite(BuildContext context) async {
+    try {
+      if (await launchUrl(
+        Uri.parse(warnellVrLabWebsiteUrl),
+        mode: LaunchMode.externalApplication,
+      )) {
+        return;
+      }
+    } on PlatformException {
+      // Show the same message as a launch request that returns false.
+    } on MissingPluginException {
+      // The platform does not have a URL launcher implementation available.
+    }
+
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Couldn't open this link. Please try again."),
+      ),
+    );
+  }
+
+  //builds the Intern Updates page widget
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -47,181 +75,247 @@ class InternUpdates extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Warnell VR Lab"),
         centerTitle: true,
-        actions: [
-          const SettingsButton(),
-        ],
+        actions: [const SettingsButton()],
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Card(
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
-                  side: BorderSide(
-                    color: isDark ? AppColors.borderDark : AppColors.borderLight,
-                    width: 1.2,
-                  ),
-                ),
-                color: isDark ? AppColors.cardDark : AppColors.cardLight,
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      //creates a robot icon with a gradient background
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: const LinearGradient(
-                            colors: [
-                              AppColors.deepForest,
-                              AppColors.forestGradientEnd,
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  //adds a link to the Warnell VR Lab website for more information
+                  Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      side: BorderSide(
+                        color: isDark
+                            ? AppColors.borderDark
+                            : AppColors.borderLight,
+                        width: 1.2,
+                      ),
+                    ),
+                    color: isDark ? AppColors.cardDark : AppColors.cardLight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.campaign_outlined,
+                            size: 36,
+                            color: colorScheme.primary,
                           ),
-                        ),
-                        child: const Icon(
-                          Icons.smart_toy_outlined,
-                          size: 40,
-                          color: AppColors.buttonText,
-                        ),
-                      ),
-
-                      //Coming soon message for description about Percy, the Warnell VR Lab robot
-                      Text(
-                        "What's Next",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: colorScheme.primary,
-                        ),
-                      ),
-                      
-                      //longer description about Percy's development
-                      const SizedBox(height: 12),
-                      Text(
-                        "Percy, our Warnell VR Lab robot, is still in development. He will collect LiDAR data and capture tree imagery around his home.",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          height: 1.6,
-                          color: colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-
-                      const SizedBox(height: 20),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                        decoration: BoxDecoration(
-                          color: isDark
-                              ? AppColors.forestGradientMiddle
-                              : AppColors.mutedLeaf,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        
-                        //shorter, catchier message for users
-                        child: Text(
-                          "Stay tuned for Percy's adventures around the UGA campus!",
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: isDark ? AppColors.textDark : AppColors.textLight,
-                            fontWeight: FontWeight.w600,
+                          const SizedBox(height: 12),
+                          Text(
+                            'Stay up to date with the Warnell VR Lab',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.titleLarge
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: colorScheme.primary,
+                                ),
                           ),
-                        ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Visit our website for additional lab news, projects, and updates!',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(color: colorScheme.onSurfaceVariant),
+                          ),
+                          const SizedBox(height: 16),
+                          FilledButton.icon(
+                            onPressed: () => _openWebsite(context),
+                            icon: const Icon(Icons.open_in_new),
+                            label: const Text('Visit the VR Lab website'),
+                          ),
+                        ],
                       ),
-
-                    ],
+                    ),
                   ),
-                ),
-              ),
 
-              const SizedBox(height: 25),
+                  const SizedBox(height: 25),
 
-              // Page Title
-              const Text(
-                "Intern Updates",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-
-              const SizedBox(height: 25),
-              // Description of overall page content
-              const Text(
-                "Stay updated with the latest news on the Warnell VR Lab interns. ",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  height: 1.6,
-                ),
-              ),
-
-
-              const SizedBox(height: 25),
-              ...List.generate(
-                _entries.length,
-                (index) => Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: _InternUpdateEntryCard(
-                    entry: _entries[index],
-                    isDark: isDark,
+                  // Page Title
+                  const Text(
+                    "Intern Updates",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
-                ),
+
+                  const SizedBox(height: 25),
+                  // Description of overall page content
+                  const Text(
+                    "Here are some highlights from the Warnell VR Lab interns.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18, height: 1.6),
+                  ),
+
+                  //Box with robot information
+                  const SizedBox(height: 25),
+                  Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      side: BorderSide(
+                        color: isDark
+                            ? AppColors.borderDark
+                            : AppColors.borderLight,
+                        width: 1.2,
+                      ),
+                    ),
+                    color: isDark ? AppColors.cardDark : AppColors.cardLight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          //creates a robot icon with a gradient background
+                          Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: const LinearGradient(
+                                colors: [
+                                  AppColors.deepForest,
+                                  AppColors.forestGradientEnd,
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                            ),
+                            child: const Icon(
+                              Icons.smart_toy_outlined,
+                              size: 40,
+                              color: AppColors.buttonText,
+                            ),
+                          ),
+
+                          //Coming soon message for description about Percy, the Warnell VR Lab robot
+                          Text(
+                            "What's Next",
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.headlineSmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: colorScheme.primary,
+                                ),
+                          ),
+
+                          //longer description about Percy's development
+                          const SizedBox(height: 12),
+                          Text(
+                            "Percy, our Warnell VR Lab robot, is still in development. He will collect LiDAR data and capture tree imagery around his home.",
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(
+                                  height: 1.6,
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                          ),
+
+                          const SizedBox(height: 20),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isDark
+                                  ? AppColors.forestGradientMiddle
+                                  : AppColors.mutedLeaf,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+
+                            //shorter, catchier message for users
+                            child: Text(
+                              "Stay tuned for Percy's adventures around the UGA campus!",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(
+                                    color: isDark
+                                        ? AppColors.textDark
+                                        : AppColors.textLight,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 25),
+                  ...List.generate(
+                    _entries.length,
+                    (index) => Padding(
+                      padding: const EdgeInsets.only(bottom: 20.0),
+                      child: _InternUpdateEntryCard(
+                        entry: _entries[index],
+                        isDark: isDark,
+                      ),
+                    ),
+                  ),
+                ],
               ),
+            ),
 
+            //bold PERSEUS acronym explained, taken from Warnell VR website
+            const SizedBox(height: 25),
+            Container(
+              width: double.infinity,
+              color: colorScheme.primary,
+              padding: const EdgeInsets.fromLTRB(44.0, 20.0, 44.0, 20.0),
+              child: Column(
+                children: [
+                  Text(
+                    "PROMOTING ECONOMIC RESILIENCE AND SUSTAINABILITY OF EASTERN U.S. FORESTS",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 15,
+                      height: 1.6,
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onPrimary,
+                    ),
+                  ),
 
+                  //image of PERSEUS logo
+                  const SizedBox(height: 40),
+                  const LazyImage(
+                    assetPath: 'lib/assets/images/perseus_logo.jpg',
+                  ),
 
-//bold PERSEUS acronym explained, taken from Warnell VR website
-              const SizedBox(height: 25),
-              const Text(
-                "PROMOTING ECONOMIC RESILIENCE AND SUSTAINABILITY OF EASTERN U.S. FORESTS",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 15,
-                  height: 1.6,
-                  fontWeight: FontWeight.bold,
-                ),
+                  //description of the PERSEUS Project, taken from Warnell VR website
+                  const SizedBox(height: 25),
+                  Text(
+                    "Funded by USDA's NIFA program, PERSEUS is a multi-institution collaboration between the University of Georgia, Purdue University, and the University of Maine. The PERSEUS project will provide the necessary foundation for redefining national forest inventory in the U.S., while also providing the ability to project future forest conditions and provide ecosystem services across contrasting scales."
+                    " Eastern U.S. forests are predominantly privately owned, and forest landowners often lack basic information and tools necessary to assess, manage, and project important forest ecosystem services and their potential economic value."
+                    " PERSEUS will allow land managers to make informed decisions that will affect the delivery, sustainability, and resilience of forest resources.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
+                      height: 1.6,
+                      color: colorScheme.onPrimary,
+                    ),
+                  ),
+
+                  //italicized description of funding for the PERSEUS Project, taken from Warnell VR website
+                  const SizedBox(height: 25),
+                  Text(
+                    "This work is supported by the U.S. Department of Agriculture, National Institute of Food and Agriculture, Sustainable Agricultural Systems program, PERSEUS grant, #2023-68012-38992.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
+                      height: 1.6,
+                      fontStyle: FontStyle.italic,
+                      color: colorScheme.onPrimary,
+                    ),
+                  ),
+                ],
               ),
-
-              //image of PERSEUS logo
-              const SizedBox(height: 40),
-              const LazyImage(assetPath: 'lib/assets/images/perseus_logo.jpg'),
-
-              //description of the PERSEUS Project, taken from Warnell VR website
-              const SizedBox(height: 25),
-              const Text(
-                "Funded by USDA's NIFA program, PERSEUS is a multi-institution collaboration between the University of Georgia, Purdue University, and the University of Maine. The PERSEUS project will provide the necessary foundation for redefining national forest inventory in the U.S., while also providing the ability to project future forest conditions and provide ecosystem services across contrasting scales."
-                " Eastern U.S. forests are predominantly privately owned, and forest landowners often lack basic information and tools necessary to assess, manage, and project important forest ecosystem services and their potential economic value."
-                " PERSEUS will allow land managers to make informed decisions that will affect the delivery, sustainability, and resilience of forest resources.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 12,
-                  height: 1.6,
-                ),
-              ),
-
-              //italicized description of funding for the PERSEUS Project, taken from Warnell VR website
-              const SizedBox(height: 25),
-              const Text(
-                "This work is supported by the U.S. Department of Agriculture, National Institute of Food and Agriculture, Sustainable Agricultural Systems program, PERSEUS grant, #2023-68012-38992.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 12,
-                  height: 1.6,
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-              
-
-
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -242,10 +336,7 @@ class _InternUpdateEntryCard extends StatelessWidget {
   final _InternUpdateEntry entry;
   final bool isDark;
 
-  const _InternUpdateEntryCard({
-    required this.entry,
-    required this.isDark,
-  });
+  const _InternUpdateEntryCard({required this.entry, required this.isDark});
 
   @override
   Widget build(BuildContext context) {

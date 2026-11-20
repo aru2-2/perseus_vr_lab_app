@@ -8,7 +8,7 @@ The Warnell VR Lab App is part of the PERSEUS Project at the University of Georg
 
 - **VR Materials**: Open the Warnell VR Lab YouTube channel, VR headset checkout form, VR headset check-in form, headset instructions, Unity development guide, and UGA Miller Learning Center technology lending policy. If a link cannot be opened, the app displays a message.
 - **Posters and Publications**: Browse a timeline of Warnell VR Lab presentations and research posters.
-- **Intern Updates**: View updates and images from PERSEUS Project interns, including information about fieldwork, conferences, drone data collection, and 360-degree imagery.
+- **Intern Updates**: View updates and images from PERSEUS Project interns, including information about fieldwork, conferences, drone data collection, and 360-degree imagery. Visit the Warnell VR Lab website for the latest news and project updates.
 - **Contact Form**: Validate and prepare feedback in the user's default email application. The form allows up to three messages per app session.
 - **Accessibility settings**: Switch between light and dark themes in Settings, adjust app-wide text size from `0.8x` to `1.4x`, and enable higher contrast colors. App bars provide a shortcut to Settings.
 - **Responsive layouts**: Scrollable content and flexible controls support small screens as well as larger desktop and web windows.

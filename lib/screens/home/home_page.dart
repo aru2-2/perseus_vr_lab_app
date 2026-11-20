@@ -51,78 +51,86 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 16),
-              //title card that introduces the app's purpose and content
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Welcome to the \nWarnell VR Lab App!",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.w700,
-                        ),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 800),
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 16),
+                  //title card that introduces the app's purpose and content
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            "Welcome to the \nWarnell VR Lab App!",
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.headlineSmall
+                                ?.copyWith(fontWeight: FontWeight.w700),
+                          ),
+                          //short description about the Warnell VR Lab app
+                          const SizedBox(height: 10),
+                          Text(
+                            "Explore immersive forestry research and innovations in virtual reality from interns at the University of Georgia.",
+                            textAlign: TextAlign.center,
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurfaceVariant,
+                              height: 1.5,
+                            ),
+                          ),
+                        ],
                       ),
-                      //short description about the Warnell VR Lab app
-                      const SizedBox(height: 10),
-                      Text(
-                        "Explore immersive forestry research and innovations in virtual reality from interns at the University of Georgia.",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                          height: 1.5,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+
+                  //individual buttons for the different screens of the app
+                  //First: VR Materials
+                  const SizedBox(height: 16),
+                  CustomButton(
+                    text: "VR Materials",
+                    icon: Icons.view_in_ar,
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/vr_materials");
+                    },
+                  ),
+                  //Second: Posters and Publications
+                  const SizedBox(height: 12),
+                  CustomButton(
+                    text: "Posters and Publications",
+                    icon: Icons.newspaper,
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/posters_and_publications");
+                    },
+                  ),
+                  //Third: Intern Updates
+                  const SizedBox(height: 12),
+                  CustomButton(
+                    text: "Intern Updates",
+                    icon: Icons.circle_notifications,
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/intern_updates");
+                    },
+                  ),
+                  //Fourth: Contact Form
+                  const SizedBox(height: 12),
+                  CustomButton(
+                    text: "Contact Form",
+                    icon: Icons.feedback_outlined,
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/contact_form");
+                    },
+                  ),
+                ],
               ),
-              
-              //individual buttons for the different screens of the app
-              //First: VR Materials
-              const SizedBox(height: 16),
-              CustomButton(
-                text: "VR Materials",
-                icon: Icons.view_in_ar,
-                onPressed: () {
-                  Navigator.pushNamed(context, "/vr_materials");
-                },
-              ),
-              //Second: Posters and Publications
-              const SizedBox(height: 12),
-              CustomButton(
-                text: "Posters and Publications",
-                icon: Icons.newspaper,
-                onPressed: () {
-                  Navigator.pushNamed(context, "/posters_and_publications");
-                },
-              ),
-              //Third: Intern Updates
-              const SizedBox(height: 12),
-              CustomButton(
-                text: "Intern Updates",
-                icon: Icons.circle_notifications,
-                onPressed: () {
-                  Navigator.pushNamed(context, "/intern_updates");
-                },
-              ),
-              //Fourth: Contact Form
-              const SizedBox(height: 12),
-              CustomButton(
-                text: "Contact Form",
-                icon: Icons.feedback_outlined,
-                onPressed: () {
-                  Navigator.pushNamed(context, "/contact_form");
-                },
-              ),
-            ],
+            ),
           ),
         ),
       ),
