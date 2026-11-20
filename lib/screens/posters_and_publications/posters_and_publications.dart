@@ -64,16 +64,20 @@ class PostersAndPublications extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 "Posters and Publications",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 "Explore the collection of posters and publications related to the Warnell VR Lab.",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, height: 1.6),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge?.copyWith(height: 1.6),
               ),
               const SizedBox(height: 28),
               ...List.generate(
@@ -141,7 +145,7 @@ class _TimelineEntryRow extends StatelessWidget {
       return Text(
         entry.description,
         textAlign: TextAlign.left,
-        style: const TextStyle(fontSize: 17, height: 1.6),
+        style: const TextStyle(height: 1.6),
       );
     }
 
@@ -157,7 +161,10 @@ class _TimelineEntryRow extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.left,
       text: TextSpan(
-        style: const TextStyle(fontSize: 17, height: 1.6, color: Colors.black),
+        style: TextStyle(
+          height: 1.6,
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
         children: [
           TextSpan(text: entry.description.substring(0, linkStartIndex)),
           TextSpan(
@@ -225,7 +232,6 @@ class _TimelineEntryRow extends StatelessWidget {
                       Text(
                         entry.year,
                         style: TextStyle(
-                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: colorScheme.primary,
                         ),
@@ -233,10 +239,7 @@ class _TimelineEntryRow extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         entry.title,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: const TextStyle(fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(height: 16),
                       LazyImage(assetPath: entry.imagePath),

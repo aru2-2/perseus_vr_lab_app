@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../utils/colors.dart';
+import '../../utils/accessibility.dart';
 import '../../widgets/lazy_image.dart';
 import '../../widgets/settings_button.dart';
 
@@ -90,9 +91,7 @@ class VRMaterials extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Warnell VR Lab"),
         centerTitle: true,
-        actions: [
-          const SettingsButton(),
-        ],
+        actions: [const SettingsButton()],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -101,18 +100,22 @@ class VRMaterials extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Page Title
-              const Text(
+              Text(
                 "VR Materials",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
 
               const SizedBox(height: 25),
               // Description of overall content on this page
-              const Text(
+              Text(
                 "This page houses a collection of resources and materials related to the Warnell VR Lab. ",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, height: 1.6),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge?.copyWith(height: 1.6),
               ),
 
               const SizedBox(height: 25),
@@ -174,7 +177,9 @@ class _VRMaterialsResourceCard extends StatelessWidget {
 
     if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Couldn't open this link. Please try again.")),
+      const SnackBar(
+        content: Text("Couldn't open this link. Please try again."),
+      ),
     );
   }
 
@@ -221,7 +226,10 @@ class _VRMaterialsResourceCard extends StatelessWidget {
                         vertical: 10,
                       ),
                     ),
-                    icon: Icon(entry.actionIcon),
+                    icon: Icon(
+                      entry.actionIcon,
+                      size: accessibleIconSize(context, 24),
+                    ),
                     label: Text(entry.actionLabel),
                   ),
                 ),
@@ -237,7 +245,6 @@ class _VRMaterialsResourceCard extends StatelessWidget {
                 entry.description,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 15,
                   height: 1.6,
                   color: isDark ? AppColors.textDark : AppColors.textLight,
                 ),

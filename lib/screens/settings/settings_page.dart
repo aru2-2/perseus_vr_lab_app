@@ -28,7 +28,7 @@ class SettingsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Settings'), centerTitle: true),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
         child: Card(
           child: Padding(
@@ -58,8 +58,8 @@ class SettingsPage extends StatelessWidget {
                 Slider(
                   value: fontScale,
                   min: 0.8,
-                  max: 1.4,
-                  divisions: 6,
+                  max: 2.0,
+                  divisions: 12,
                   label: '${fontScale.toStringAsFixed(1)}x',
                   onChanged: onChangeFontScale,
                 ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../utils/colors.dart';
+import '../../utils/accessibility.dart';
 import '../../widgets/lazy_image.dart';
 import '../../widgets/settings_button.dart';
 
@@ -105,7 +106,7 @@ class InternUpdates extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.campaign_outlined,
-                            size: 36,
+                            size: accessibleIconSize(context, 36),
                             color: colorScheme.primary,
                           ),
                           const SizedBox(height: 12),
@@ -128,7 +129,10 @@ class InternUpdates extends StatelessWidget {
                           const SizedBox(height: 16),
                           FilledButton.icon(
                             onPressed: () => _openWebsite(context),
-                            icon: const Icon(Icons.open_in_new),
+                            icon: Icon(
+                              Icons.open_in_new,
+                              size: accessibleIconSize(context, 18),
+                            ),
                             label: const Text('Visit the VR Lab website'),
                           ),
                         ],
@@ -139,18 +143,22 @@ class InternUpdates extends StatelessWidget {
                   const SizedBox(height: 25),
 
                   // Page Title
-                  const Text(
+                  Text(
                     "Intern Updates",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
 
                   const SizedBox(height: 25),
                   // Description of overall page content
-                  const Text(
+                  Text(
                     "Here are some highlights from the Warnell VR Lab interns.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18, height: 1.6),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyLarge?.copyWith(height: 1.6),
                   ),
 
                   //Box with robot information
@@ -185,9 +193,9 @@ class InternUpdates extends StatelessWidget {
                                 end: Alignment.bottomRight,
                               ),
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.smart_toy_outlined,
-                              size: 40,
+                              size: accessibleIconSize(context, 40),
                               color: AppColors.buttonText,
                             ),
                           ),
@@ -273,7 +281,6 @@ class InternUpdates extends StatelessWidget {
                     "PROMOTING ECONOMIC RESILIENCE AND SUSTAINABILITY OF EASTERN U.S. FORESTS",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 15,
                       height: 1.6,
                       fontWeight: FontWeight.bold,
                       color: colorScheme.onPrimary,
@@ -293,11 +300,7 @@ class InternUpdates extends StatelessWidget {
                     " Eastern U.S. forests are predominantly privately owned, and forest landowners often lack basic information and tools necessary to assess, manage, and project important forest ecosystem services and their potential economic value."
                     " PERSEUS will allow land managers to make informed decisions that will affect the delivery, sustainability, and resilience of forest resources.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 12,
-                      height: 1.6,
-                      color: colorScheme.onPrimary,
-                    ),
+                    style: TextStyle(height: 1.6, color: colorScheme.onPrimary),
                   ),
 
                   //italicized description of funding for the PERSEUS Project, taken from Warnell VR website
@@ -306,7 +309,6 @@ class InternUpdates extends StatelessWidget {
                     "This work is supported by the U.S. Department of Agriculture, National Institute of Food and Agriculture, Sustainable Agricultural Systems program, PERSEUS grant, #2023-68012-38992.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 12,
                       height: 1.6,
                       fontStyle: FontStyle.italic,
                       color: colorScheme.onPrimary,
@@ -361,7 +363,6 @@ class _InternUpdateEntryCard extends StatelessWidget {
               entry.description,
               textAlign: TextAlign.left,
               style: TextStyle(
-                fontSize: 17,
                 height: 1.6,
                 color: isDark ? AppColors.textDark : AppColors.textLight,
               ),

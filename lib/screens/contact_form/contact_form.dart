@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../utils/colors.dart';
+import '../../utils/accessibility.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/settings_button.dart';
 
@@ -95,7 +96,7 @@ class _ContactFormPageState extends State<ContactFormPage> {
       _isSubmitting = true;
     });
 
-  //contructs the email message using the user's input
+    //contructs the email message using the user's input
     final name = _nameController.text.trim();
     final email = _emailController.text.trim();
     final message = _messageController.text.trim();
@@ -107,9 +108,11 @@ class _ContactFormPageState extends State<ContactFormPage> {
       'Message:\n$message',
     );
 
-    final uri = Uri.parse('mailto:WarnellVRLab@uga.edu?subject=$subject&body=$body');
+    final uri = Uri.parse(
+      'mailto:WarnellVRLab@uga.edu?subject=$subject&body=$body',
+    );
 
-  //opens the user's default email app with their feedback message
+    //opens the user's default email app with their feedback message
     try {
       if (await canLaunchUrl(uri)) {
         _messagesSentThisSession += 1;
@@ -120,7 +123,9 @@ class _ContactFormPageState extends State<ContactFormPage> {
         //shows error message if the user's email app cannot be opened
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Unable to open your email app right now.')),
+          const SnackBar(
+            content: Text('Unable to open your email app right now.'),
+          ),
         );
       }
     } finally {
@@ -132,7 +137,7 @@ class _ContactFormPageState extends State<ContactFormPage> {
     }
   }
 
-//builds the feedback form page with title, user input fields, and submit button
+  //builds the feedback form page with title, user input fields, and submit button
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -155,9 +160,7 @@ class _ContactFormPageState extends State<ContactFormPage> {
       appBar: AppBar(
         title: const Text('Contact Form'),
         centerTitle: true,
-        actions: [
-          const SettingsButton(),
-        ],
+        actions: [const SettingsButton()],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
@@ -182,7 +185,9 @@ class _ContactFormPageState extends State<ContactFormPage> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
@@ -190,7 +195,7 @@ class _ContactFormPageState extends State<ContactFormPage> {
                       children: [
                         Icon(
                           Icons.open_in_new_rounded,
-                          size: 20,
+                          size: accessibleIconSize(context, 20),
                           color: Theme.of(context).colorScheme.primary,
                         ),
                         const SizedBox(width: 10),
@@ -207,7 +212,10 @@ class _ContactFormPageState extends State<ContactFormPage> {
                     controller: _nameController,
                     decoration: InputDecoration(
                       labelText: 'Your name',
-                      prefixIcon: const Icon(Icons.person_outline),
+                      prefixIcon: Icon(
+                        Icons.person_outline,
+                        size: accessibleIconSize(context, 24),
+                      ),
                       enabledBorder: outline,
                       focusedBorder: focusedOutline,
                       errorBorder: outline,
@@ -226,7 +234,10 @@ class _ContactFormPageState extends State<ContactFormPage> {
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       labelText: 'Email address',
-                      prefixIcon: const Icon(Icons.email_outlined),
+                      prefixIcon: Icon(
+                        Icons.email_outlined,
+                        size: accessibleIconSize(context, 24),
+                      ),
                       enabledBorder: outline,
                       focusedBorder: focusedOutline,
                       errorBorder: outline,
@@ -249,7 +260,10 @@ class _ContactFormPageState extends State<ContactFormPage> {
                     decoration: InputDecoration(
                       labelText: 'Your message',
                       alignLabelWithHint: true,
-                      prefixIcon: const Icon(Icons.message_outlined),
+                      prefixIcon: Icon(
+                        Icons.message_outlined,
+                        size: accessibleIconSize(context, 24),
+                      ),
                       enabledBorder: outline,
                       focusedBorder: focusedOutline,
                       errorBorder: outline,
@@ -269,7 +283,8 @@ class _ContactFormPageState extends State<ContactFormPage> {
                         ? 'Limit reached'
                         : (_isSubmitting ? 'Opening email…' : 'Open Email App'),
                     icon: Icons.send_rounded,
-                    onPressed: _messagesSentThisSession >= _maxMessagesPerSession
+                    onPressed:
+                        _messagesSentThisSession >= _maxMessagesPerSession
                         ? _showLimitReachedMessage
                         : (_isSubmitting ? () {} : _submitFeedback),
                   ),

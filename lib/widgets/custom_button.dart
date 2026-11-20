@@ -1,6 +1,7 @@
 //import statements
 import 'package:flutter/material.dart';
 import '../utils/colors.dart';
+import '../utils/accessibility.dart';
 
 //creates custom button widgets across the app with a consistent style and behavior
 class CustomButton extends StatefulWidget {
@@ -8,7 +9,7 @@ class CustomButton extends StatefulWidget {
   final IconData icon;
   final VoidCallback onPressed;
 
-//constructor for the CustomButton class
+  //constructor for the CustomButton class
   const CustomButton({
     super.key,
     required this.text,
@@ -24,7 +25,7 @@ class CustomButton extends StatefulWidget {
 class _CustomButtonState extends State<CustomButton> {
   bool _isPressed = false;
 
-//builds the CustomButton widget with specified text, icon, and onPressed callback
+  //builds the CustomButton widget with specified text, icon, and onPressed callback
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -45,7 +46,9 @@ class _CustomButtonState extends State<CustomButton> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: _isPressed ? 0.12 : 0.18),
+                  color: Colors.black.withValues(
+                    alpha: _isPressed ? 0.12 : 0.18,
+                  ),
                   blurRadius: _isPressed ? 8 : 14,
                   offset: const Offset(0, 6),
                 ),
@@ -74,31 +77,31 @@ class _CustomButtonState extends State<CustomButton> {
                   ),
                   child: Container(
                     width: double.infinity,
-                    height: isWide ? 72 : 58,
+                    constraints: BoxConstraints(minHeight: isWide ? 72 : 58),
                     padding: EdgeInsets.symmetric(
                       horizontal: isWide ? 24 : 20,
+                      vertical: 12,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           widget.icon,
-                          size: isWide ? 24 : 20,
+                          size: accessibleIconSize(context, isWide ? 24 : 20),
                           color: colorScheme.onPrimary,
                         ),
                         SizedBox(width: isWide ? 16 : 12),
                         Flexible(
                           child: Text(
                             widget.text,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: isWide ? 20 : 16,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 0.2,
-                              color: colorScheme.onPrimary,
-                            ),
+                            style: Theme.of(context).textTheme.labelLarge
+                                ?.copyWith(
+                                  fontSize: isWide ? 20 : 16,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 0.2,
+                                  color: colorScheme.onPrimary,
+                                ),
                           ),
                         ),
                       ],

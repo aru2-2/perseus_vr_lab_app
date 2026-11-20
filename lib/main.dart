@@ -61,10 +61,11 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
       debugShowCheckedModeBanner: false,
       //builds the app with the font scale
       builder: (context, child) {
+        final systemScale = MediaQuery.textScalerOf(context).scale(1.0);
         return MediaQuery(
-          data: MediaQuery.of(context).copyWith(
-            textScaler: TextScaler.linear(fontScale),
-          ),
+          data: MediaQuery.of(
+            context,
+          ).copyWith(textScaler: TextScaler.linear(systemScale * fontScale)),
           //adds a forest photo to the app's background
           child: Stack(
             fit: StackFit.expand,
@@ -79,8 +80,8 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
                 color: increaseContrast
                     ? (isDarkMode ? AppColors.backgroundDark : AppColors.cream)
                     : isDarkMode
-                        ? AppColors.backgroundDark.withValues(alpha: 0.82)
-                        : AppColors.cream.withValues(alpha: 0.84),
+                    ? AppColors.backgroundDark.withValues(alpha: 0.82)
+                    : AppColors.cream.withValues(alpha: 0.84),
               ),
               child!,
             ],
@@ -92,27 +93,28 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
         useMaterial3: true,
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.transparent,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.primary,
-          brightness: Brightness.light,
-        ).copyWith(
-          primary: increaseContrast
-              ? AppColors.highContrastPrimary
-              : AppColors.primary,
-          secondary: increaseContrast
-              ? AppColors.highContrastSecondary
-              : AppColors.secondary,
-          onPrimary: AppColors.buttonText,
-          tertiary: AppColors.leaf,
-          onTertiary: AppColors.deepForest,
-          primaryContainer: AppColors.mutedLeaf,
-          onPrimaryContainer: AppColors.deepForest,
-          surface: AppColors.cardLight,
-          surfaceContainerHighest: AppColors.mutedLeaf,
-          onSurface: AppColors.textLight,
-          onSurfaceVariant: AppColors.mutedTextLight,
-          outline: AppColors.borderLight,
-        ),
+        colorScheme:
+            ColorScheme.fromSeed(
+              seedColor: AppColors.primary,
+              brightness: Brightness.light,
+            ).copyWith(
+              primary: increaseContrast
+                  ? AppColors.highContrastPrimary
+                  : AppColors.primary,
+              secondary: increaseContrast
+                  ? AppColors.highContrastSecondary
+                  : AppColors.secondary,
+              onPrimary: AppColors.buttonText,
+              tertiary: AppColors.leaf,
+              onTertiary: AppColors.deepForest,
+              primaryContainer: AppColors.mutedLeaf,
+              onPrimaryContainer: AppColors.deepForest,
+              surface: AppColors.cardLight,
+              surfaceContainerHighest: AppColors.mutedLeaf,
+              onSurface: AppColors.textLight,
+              onSurfaceVariant: AppColors.mutedTextLight,
+              outline: AppColors.borderLight,
+            ),
         appBarTheme: AppBarTheme(
           backgroundColor: increaseContrast
               ? AppColors.highContrastPrimary
@@ -124,17 +126,14 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
           elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(18)),
-            side: BorderSide(
-              color: AppColors.borderLight,
-              width: 1.2,
-            ),
+            side: BorderSide(color: AppColors.borderLight, width: 1.2),
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: increaseContrast
-              ? AppColors.highContrastPrimary
-              : AppColors.primary,
+                ? AppColors.highContrastPrimary
+                : AppColors.primary,
             foregroundColor: AppColors.buttonText,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             elevation: 2,
@@ -154,27 +153,28 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
         useMaterial3: true,
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.transparent,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.primary,
-          brightness: Brightness.dark,
-        ).copyWith(
-          primary: increaseContrast
-              ? AppColors.highContrastPrimary
-              : AppColors.primary,
-          secondary: increaseContrast
-              ? AppColors.highContrastSecondary
-              : AppColors.secondary,
-          onPrimary: AppColors.buttonText,
-          tertiary: AppColors.leaf,
-          onTertiary: AppColors.deepForest,
-          primaryContainer: AppColors.forestGradientMiddle,
-          onPrimaryContainer: AppColors.textDark,
-          surface: AppColors.cardDark,
-          surfaceContainerHighest: AppColors.forestGradientMiddle,
-          onSurface: AppColors.textDark,
-          onSurfaceVariant: AppColors.mutedTextDark,
-          outline: AppColors.borderDark,
-        ),
+        colorScheme:
+            ColorScheme.fromSeed(
+              seedColor: AppColors.primary,
+              brightness: Brightness.dark,
+            ).copyWith(
+              primary: increaseContrast
+                  ? AppColors.highContrastPrimary
+                  : AppColors.primary,
+              secondary: increaseContrast
+                  ? AppColors.highContrastSecondary
+                  : AppColors.secondary,
+              onPrimary: AppColors.buttonText,
+              tertiary: AppColors.leaf,
+              onTertiary: AppColors.deepForest,
+              primaryContainer: AppColors.forestGradientMiddle,
+              onPrimaryContainer: AppColors.textDark,
+              surface: AppColors.cardDark,
+              surfaceContainerHighest: AppColors.forestGradientMiddle,
+              onSurface: AppColors.textDark,
+              onSurfaceVariant: AppColors.mutedTextDark,
+              outline: AppColors.borderDark,
+            ),
         appBarTheme: AppBarTheme(
           backgroundColor: increaseContrast
               ? AppColors.highContrastPrimary
@@ -186,17 +186,14 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
           elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(18)),
-            side: BorderSide(
-              color: AppColors.borderDark,
-              width: 1.2,
-            ),
+            side: BorderSide(color: AppColors.borderDark, width: 1.2),
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: increaseContrast
-              ? AppColors.highContrastPrimary
-              : AppColors.primary,
+                ? AppColors.highContrastPrimary
+                : AppColors.primary,
             foregroundColor: AppColors.buttonText,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             elevation: 2,
@@ -225,22 +222,19 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
         '/intern_updates': (context) => const InternUpdates(),
         '/contact_form': (context) => const ContactFormPage(),
         '/settings': (context) => SettingsPage(
-              isDarkMode: isDarkMode,
-              onToggleTheme: toggleTheme,
-              fontScale: fontScale,
-              onChangeFontScale: updateFontScale,
-              increaseContrast: increaseContrast,
-              onToggleIncreaseContrast: toggleIncreaseContrast,
-            ),
+          isDarkMode: isDarkMode,
+          onToggleTheme: toggleTheme,
+          fontScale: fontScale,
+          onChangeFontScale: updateFontScale,
+          increaseContrast: increaseContrast,
+          onToggleIncreaseContrast: toggleIncreaseContrast,
+        ),
       },
       //handles unknown routes and displays a simple page not found message
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
-          builder: (context) => const Scaffold(
-            body: Center(
-              child: Text('Page not found'),
-            ),
-          ),
+          builder: (context) =>
+              const Scaffold(body: Center(child: Text('Page not found'))),
         );
       },
     );

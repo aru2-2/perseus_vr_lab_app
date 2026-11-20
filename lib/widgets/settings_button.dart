@@ -1,5 +1,6 @@
 //import statements
 import 'package:flutter/material.dart';
+import '../utils/accessibility.dart';
 
 //Provides a settings action for app bars.
 class SettingsButton extends StatelessWidget {
@@ -12,7 +13,7 @@ class SettingsButton extends StatelessWidget {
       padding: const EdgeInsets.only(right: 8.0),
       child: IconButton(
         tooltip: 'Open settings',
-        icon: const Icon(Icons.settings),
+        icon: Icon(Icons.settings, size: accessibleIconSize(context, 24)),
         onPressed: () {
           Navigator.pushNamed(context, '/settings');
         },

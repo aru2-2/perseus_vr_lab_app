@@ -181,7 +181,10 @@ void main() {
 
     await tester.pump();
     expect(find.text('Posters and Publications'), findsOneWidget);
-    expect(tester.getSize(find.byType(CustomButton)).height, 58);
+    expect(
+      tester.getSize(find.byType(CustomButton)).height,
+      greaterThanOrEqualTo(58),
+    );
     expect(tester.takeException(), isNull);
   });
 
@@ -199,5 +202,73 @@ void main() {
     expect(tester.getSize(homeButton).width, 752);
     expect(tester.getSize(homeButton).height, 72);
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('system text scaling is respected without overflow', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(360, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+
+    await tester.pumpWidget(
+      MediaQuery(
+        data: const MediaQueryData(textScaler: TextScaler.linear(3.0)),
+        child: const WarnellVRLab(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Welcome to the \nWarnell VR Lab App!'), findsOneWidget);
+    expect(find.byType(CustomButton), findsNWidgets(4));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('every main route supports 200% and 300% text scaling', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(360, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+
+    const routes = [
+      '/',
+      '/vr_materials',
+      '/posters_and_publications',
+      '/intern_updates',
+      '/contact_form',
+      '/settings',
+    ];
+
+    for (final scale in [2.0, 3.0]) {
+      for (final route in routes) {
+        await tester.pumpWidget(
+          MediaQuery(
+            data: MediaQueryData(textScaler: TextScaler.linear(scale)),
+            child: const WarnellVRLab(),
+          ),
+        );
+
+        if (route != '/') {
+          final context = tester.element(find.byType(Scaffold).first);
+          Navigator.of(context).pushNamed(route);
+          await tester.pumpAndSettle();
+        } else {
+          await tester.pumpAndSettle();
+        }
+
+        expect(
+          tester.takeException(),
+          isNull,
+          reason: 'Render overflow at $route with ${scale}x text scaling',
+        );
+      }
+    }
   });
 }
