@@ -6,12 +6,12 @@ The Warnell VR Lab App is part of the PERSEUS Project at the University of Georg
 
 ## Features
 
-- **VR Materials**: Open the Warnell VR Lab YouTube channel, VR headset checkout form, VR headset check-in form, headset instructions, Unity development guide, and UGA Miller Learning Center technology lending policy. If a link cannot be opened, the app displays a message.
-- **Posters and Publications**: Browse a timeline of Warnell VR Lab presentations and research posters.
-- **Intern Updates**: View updates and images from PERSEUS Project interns, including information about fieldwork, conferences, drone data collection, and 360-degree imagery. Visit the Warnell VR Lab website for the latest news and project updates.
-- **Contact Form**: Validate and prepare feedback in the user's default email application. The form allows up to three messages per app session.
-- **Accessibility settings**: Switch between light and dark themes in Settings, adjust app-wide text size from `0.8x` to `1.4x`, and enable higher contrast colors. App bars provide a shortcut to Settings.
-- **Responsive layouts**: Scrollable content and flexible controls support small screens as well as larger desktop and web windows.
+- **VR Materials**: Open the Warnell VR Lab YouTube channel, VR headset check-out and check-in forms, headset instructions, Unity development guide, and UGA Miller Learning Center technology lending policy. Failed or unavailable links display a retry message.
+- **Posters and Publications**: Browse a chronological timeline of presentations and publications, including CURO 2026, a 2026 Purdue University conference, a 2026 Journal of Forestry brief communication, and the 2025 PERSEUS Annual Meeting. Publication links open in the external browser.
+- **Intern Updates**: View the latest intern cohort, fieldwork, conference, drone, and 360-degree camera highlights. A card links to the Warnell VR Lab website, and the page includes updates on Percy, the lab's robot in development, plus PERSEUS Project funding and partner information.
+- **Contact Form**: Validate name, email, and message fields, then prepare a feedback draft in the user's default email application. The form allows up to three messages per app session and clearly indicates that submission does not send the message directly.
+- **Accessibility settings**: Support the device's **Dark Interface** preference or select System, Light, or Dark mode; adjust app-wide text size from `0.8x` to `2.0x`; and enable **Sufficient Contrast** colors throughout the app. Settings are available from every main app screen.
+- **Responsive layouts**: Scrollable content, image sizing, flexible navigation cards, and text-aware icons support narrow phones, larger desktop windows, and high system text scales. Main app surfaces, controls, and route fallbacks are covered by widget tests.
 
 ## Built With
 
@@ -63,7 +63,7 @@ Run the widget and regression tests with:
 flutter test
 ```
 
-The current test suite covers unknown-route handling, settings access, theme switching, failed resource links, and long button labels on a narrow viewport.
+The test suite covers theme and contrast targets, system/theme selection, settings access, unknown-route handling, failed resource links, the Contact Form, PERSEUS footer theming, responsive button layouts, and text scaling from `200%` to `300%` across all main routes.
 
 ## Build Commands
 
@@ -91,7 +91,7 @@ lib/
 		contact_form/                   Feedback form
 		settings/                       Theme, text size, and contrast controls
 	widgets/                          Reusable buttons, images, and theme controls
-	utils/                            Shared colors
+	utils/                            Shared colors and text-aware accessibility helpers
 	assets/images/                    App and content images
 test/                                Flutter widget and regression tests
 ```
