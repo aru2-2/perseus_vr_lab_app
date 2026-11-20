@@ -158,7 +158,10 @@ class _ContactFormPageState extends State<ContactFormPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Contact Form'),
+        title: const FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text('Contact Form'),
+        ),
         centerTitle: true,
         actions: [const SettingsButton()],
       ),

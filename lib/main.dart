@@ -24,16 +24,16 @@ class WarnellVRLab extends StatefulWidget {
 //controls the toggle between light mode and dark mode as well as defines the routes for the different screens of the app
 class _WarnellVRLabState extends State<WarnellVRLab> {
   //controls the toggle between light mode and dark mode
-  bool isDarkMode = false;
+  ThemeMode _themeMode = ThemeMode.system;
   //displays default font size
   double fontScale = 1.0;
   //provides stronger colors and boundaries for low-vision users
   bool increaseContrast = false;
 
   //updates the light/dark mode theme of the app based on user preference
-  void toggleTheme() {
+  void updateThemeMode(ThemeMode themeMode) {
     setState(() {
-      isDarkMode = !isDarkMode;
+      _themeMode = themeMode;
     });
   }
 
@@ -55,6 +55,11 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
   //contains the title, debug banner, initial route, and defined routes for the different screens of the app
   @override
   Widget build(BuildContext context) {
+    final systemIsDark =
+        MediaQuery.platformBrightnessOf(context) == Brightness.dark;
+    final isDarkMode = _themeMode == ThemeMode.dark ||
+        (_themeMode == ThemeMode.system && systemIsDark);
+
     return MaterialApp(
       title: 'Warnell VR Lab',
 
@@ -75,12 +80,12 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
                 fit: BoxFit.cover,
                 excludeFromSemantics: true,
               ),
-              //keeps background dark with cream overlay so that viewers are not distracted from main contents
+              //Keeps the background subdued, with a solid surface in dark mode.
               ColoredBox(
-                color: increaseContrast
-                    ? (isDarkMode ? AppColors.backgroundDark : AppColors.cream)
-                    : isDarkMode
-                    ? AppColors.backgroundDark.withValues(alpha: 0.82)
+                color: isDarkMode
+                    ? AppColors.backgroundDark
+                    : increaseContrast
+                    ? AppColors.cream
                     : AppColors.cream.withValues(alpha: 0.84),
               ),
               child!,
@@ -205,7 +210,7 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
           headlineMedium: TextStyle(color: AppColors.textDark),
         ),
       ),
-      themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      themeMode: _themeMode,
 
       initialRoute: '/',
 
@@ -218,8 +223,8 @@ class _WarnellVRLabState extends State<WarnellVRLab> {
         '/intern_updates': (context) => const InternUpdates(),
         '/contact_form': (context) => const ContactFormPage(),
         '/settings': (context) => SettingsPage(
-          isDarkMode: isDarkMode,
-          onToggleTheme: toggleTheme,
+          themeMode: _themeMode,
+          onThemeModeChanged: updateThemeMode,
           fontScale: fontScale,
           onChangeFontScale: updateFontScale,
           increaseContrast: increaseContrast,

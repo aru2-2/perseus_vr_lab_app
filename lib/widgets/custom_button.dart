@@ -31,6 +31,24 @@ class _CustomButtonState extends State<CustomButton> {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isWide = constraints.maxWidth >= 600;
+        final iconSize = accessibleIconSize(context, isWide ? 24 : 20);
+        final spacing = isWide ? 16.0 : 12.0;
+        final textScale = MediaQuery.textScalerOf(context).scale(1.0);
+        final icon = Icon(
+          widget.icon,
+          size: iconSize,
+          color: AppColors.buttonText,
+        );
+        final label = Text(
+          widget.text,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+            fontSize: isWide ? 20 : 16,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.2,
+            color: AppColors.buttonText,
+          ),
+        );
 
         //animated button changes appearance when pressed for better user experience
         return AnimatedScale(
@@ -80,30 +98,28 @@ class _CustomButtonState extends State<CustomButton> {
                       horizontal: isWide ? 24 : 20,
                       vertical: 12,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          widget.icon,
-                          size: accessibleIconSize(context, isWide ? 24 : 20),
-                          color: AppColors.buttonText,
-                        ),
-                        SizedBox(width: isWide ? 16 : 12),
-                        Flexible(
-                          child: Text(
-                            widget.text,
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.labelLarge
-                                ?.copyWith(
-                                  fontSize: isWide ? 20 : 16,
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: 0.2,
-                                  color: AppColors.buttonText,
+                    child: textScale > 1.5
+                        ? Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              icon,
+                              SizedBox(height: spacing),
+                              label,
+                            ],
+                          )
+                        : Row(
+                            children: [
+                              SizedBox(
+                                width: iconSize + spacing,
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: icon,
                                 ),
+                              ),
+                              Expanded(child: label),
+                              SizedBox(width: iconSize + spacing),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
                   ),
                 ),
               ),

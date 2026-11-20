@@ -85,20 +85,98 @@ void main() {
     }
   });
 
-  testWidgets('theme can only be toggled from settings', (tester) async {
-    await tester.pumpWidget(const WarnellVRLab());
+  testWidgets('theme follows the system and supports explicit mode choices', (
+    tester,
+  ) async {
+    tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
+    addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
 
-    expect(find.byTooltip('Switch to dark mode'), findsNothing);
+    await tester.pumpWidget(const WarnellVRLab());
+    await tester.pumpAndSettle();
+
+    var app = tester.widget<MaterialApp>(find.byType(MaterialApp));
+    expect(app.themeMode, ThemeMode.system);
+    expect(
+      Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
+      Brightness.dark,
+    );
+
     await tester.tap(find.byTooltip('Open settings'));
     await tester.pumpAndSettle();
 
-    final themeSwitch = find.widgetWithText(SwitchListTile, 'Theme');
-    expect(tester.widget<SwitchListTile>(themeSwitch).value, isFalse);
-    await tester.tap(find.text('Light mode is enabled'));
+    final themeSelector = find.byType(DropdownButtonFormField<ThemeMode>);
+    expect(
+      tester
+          .widget<DropdownButtonFormField<ThemeMode>>(themeSelector)
+          .initialValue,
+      ThemeMode.system,
+    );
+    await tester.tap(themeSelector);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Light').last);
     await tester.pumpAndSettle();
 
-    expect(tester.widget<SwitchListTile>(themeSwitch).value, isTrue);
-    expect(find.text('Dark mode is enabled'), findsOneWidget);
+    app = tester.widget<MaterialApp>(find.byType(MaterialApp));
+    expect(app.themeMode, ThemeMode.light);
+    expect(
+      Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
+      Brightness.light,
+    );
+
+    await tester.tap(themeSelector);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Dark').last);
+    await tester.pumpAndSettle();
+
+    app = tester.widget<MaterialApp>(find.byType(MaterialApp));
+    expect(app.themeMode, ThemeMode.dark);
+    expect(
+      Theme.of(tester.element(find.byType(Scaffold).first)).brightness,
+      Brightness.dark,
+    );
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('PERSEUS footer matches the app bar in both themes', (
+    tester,
+  ) async {
+    VisibilityDetectorController.instance.updateInterval = Duration.zero;
+    addTearDown(
+      () => VisibilityDetectorController.instance.updateInterval =
+          const Duration(milliseconds: 500),
+    );
+    tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
+    addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
+
+    await tester.pumpWidget(const WarnellVRLab());
+    final context = tester.element(find.text('Warnell VR Lab'));
+    Navigator.of(context).pushNamed('/intern_updates');
+    await tester.pumpAndSettle();
+
+    final footerText = find.text(
+      'PROMOTING ECONOMIC RESILIENCE AND SUSTAINABILITY OF EASTERN U.S. FORESTS',
+    );
+    final footer = find.ancestor(
+      of: footerText,
+      matching: find.byType(Container),
+    );
+
+    for (final brightness in [Brightness.dark, Brightness.light]) {
+      tester.platformDispatcher.platformBrightnessTestValue = brightness;
+      await tester.pumpAndSettle();
+
+      final app = tester.widget<MaterialApp>(find.byType(MaterialApp));
+      final theme = brightness == Brightness.dark ? app.darkTheme! : app.theme!;
+      expect(
+        tester.widget<Container>(footer.first).color,
+        theme.appBarTheme.backgroundColor,
+      );
+      expect(
+        tester.widget<Text>(footerText).style?.color,
+        theme.appBarTheme.foregroundColor,
+      );
+    }
+
     expect(tester.takeException(), isNull);
   });
 
@@ -206,6 +284,33 @@ void main() {
       greaterThanOrEqualTo(58),
     );
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('custom button text is centered independently of its icon', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: SizedBox(
+              width: 280,
+              child: CustomButton(
+                text: 'Posters and Publications',
+                icon: Icons.newspaper,
+                onPressed: () {},
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    final buttonCenter = tester.getCenter(find.byType(CustomButton)).dx;
+    final textCenter = tester
+        .getCenter(find.text('Posters and Publications'))
+        .dx;
+    expect((buttonCenter - textCenter).abs(), lessThan(0.5));
   });
 
   testWidgets('custom button scales up on wide layouts', (tester) async {

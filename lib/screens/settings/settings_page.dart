@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 //creates the Settings Page of the app
 class SettingsPage extends StatelessWidget {
   //variables for the features of the settings screen
-  final bool isDarkMode;
-  final VoidCallback onToggleTheme;
+  final ThemeMode themeMode;
+  final ValueChanged<ThemeMode> onThemeModeChanged;
   final double fontScale;
   final ValueChanged<double> onChangeFontScale;
   final bool increaseContrast;
@@ -13,8 +13,8 @@ class SettingsPage extends StatelessWidget {
 
   const SettingsPage({
     super.key,
-    required this.isDarkMode,
-    required this.onToggleTheme,
+    required this.themeMode,
+    required this.onThemeModeChanged,
     required this.fontScale,
     required this.onChangeFontScale,
     required this.increaseContrast,
@@ -24,8 +24,6 @@ class SettingsPage extends StatelessWidget {
   //builds the settings page widget
   @override
   Widget build(BuildContext context) {
-    final isDark = isDarkMode;
-
     return Scaffold(
       appBar: AppBar(title: const Text('Settings'), centerTitle: true),
       body: SingleChildScrollView(
@@ -37,15 +35,28 @@ class SettingsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
-                SwitchListTile(
-                  //toggle switches between light and dark mode
-                  title: const Text('Theme'),
-                  subtitle: Text(
-                    isDark ? 'Dark mode is enabled' : 'Light mode is enabled',
-                  ),
-                  value: isDark,
-                  onChanged: (_) {
-                    onToggleTheme();
+                DropdownButtonFormField<ThemeMode>(
+                  initialValue: themeMode,
+                  isExpanded: true,
+                  decoration: const InputDecoration(labelText: 'Theme'),
+                  items: const [
+                    DropdownMenuItem(
+                      value: ThemeMode.system,
+                      child: Text('System'),
+                    ),
+                    DropdownMenuItem(
+                      value: ThemeMode.light,
+                      child: Text('Light'),
+                    ),
+                    DropdownMenuItem(
+                      value: ThemeMode.dark,
+                      child: Text('Dark'),
+                    ),
+                  ],
+                  onChanged: (mode) {
+                    if (mode != null) {
+                      onThemeModeChanged(mode);
+                    }
                   },
                 ),
                 //slider adjusts the font size for the app based on the user's preferences

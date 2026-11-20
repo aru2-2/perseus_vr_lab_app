@@ -44,7 +44,10 @@ class HomePage extends StatelessWidget {
         ),
 
         //centers the title of the app in the center of the top banner
-        title: const Text("Warnell VR Lab"),
+        title: const FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text("Warnell VR Lab"),
+        ),
         centerTitle: true,
         actions: [
           const SettingsButton(),

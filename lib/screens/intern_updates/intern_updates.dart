@@ -71,10 +71,15 @@ class InternUpdates extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final footerTextColor =
+        Theme.of(context).appBarTheme.foregroundColor ?? colorScheme.onPrimary;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Warnell VR Lab"),
+        title: const FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text("Warnell VR Lab"),
+        ),
         centerTitle: true,
         actions: [const SettingsButton()],
       ),
@@ -127,13 +132,24 @@ class InternUpdates extends StatelessWidget {
                                 ?.copyWith(color: colorScheme.onSurfaceVariant),
                           ),
                           const SizedBox(height: 16),
-                          FilledButton.icon(
+                          FilledButton(
                             onPressed: () => _openWebsite(context),
-                            icon: Icon(
-                              Icons.open_in_new,
-                              size: accessibleIconSize(context, 18),
+                            child: Wrap(
+                              alignment: WrapAlignment.center,
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              spacing: 8,
+                              runSpacing: 4,
+                              children: [
+                                Icon(
+                                  Icons.open_in_new,
+                                  size: accessibleIconSize(context, 18),
+                                ),
+                                const Text(
+                                  'Visit the VR Lab website',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
                             ),
-                            label: const Text('Visit the VR Lab website'),
                           ),
                         ],
                       ),
@@ -273,7 +289,9 @@ class InternUpdates extends StatelessWidget {
             const SizedBox(height: 25),
             Container(
               width: double.infinity,
-              color: colorScheme.primary,
+              color:
+                  Theme.of(context).appBarTheme.backgroundColor ??
+                  colorScheme.primary,
               padding: const EdgeInsets.fromLTRB(44.0, 20.0, 44.0, 20.0),
               child: Column(
                 children: [
@@ -283,7 +301,7 @@ class InternUpdates extends StatelessWidget {
                     style: TextStyle(
                       height: 1.6,
                       fontWeight: FontWeight.bold,
-                      color: colorScheme.onPrimary,
+                      color: footerTextColor,
                     ),
                   ),
 
@@ -300,7 +318,7 @@ class InternUpdates extends StatelessWidget {
                     " Eastern U.S. forests are predominantly privately owned, and forest landowners often lack basic information and tools necessary to assess, manage, and project important forest ecosystem services and their potential economic value."
                     " PERSEUS will allow land managers to make informed decisions that will affect the delivery, sustainability, and resilience of forest resources.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(height: 1.6, color: colorScheme.onPrimary),
+                    style: TextStyle(height: 1.6, color: footerTextColor),
                   ),
 
                   //italicized description of funding for the PERSEUS Project, taken from Warnell VR website
@@ -311,7 +329,7 @@ class InternUpdates extends StatelessWidget {
                     style: TextStyle(
                       height: 1.6,
                       fontStyle: FontStyle.italic,
-                      color: colorScheme.onPrimary,
+                      color: footerTextColor,
                     ),
                   ),
                 ],

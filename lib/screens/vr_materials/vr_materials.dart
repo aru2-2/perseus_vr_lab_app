@@ -89,7 +89,10 @@ class VRMaterials extends StatelessWidget {
     return Scaffold(
       //top bar of the app
       appBar: AppBar(
-        title: const Text("Warnell VR Lab"),
+        title: const FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text("Warnell VR Lab"),
+        ),
         centerTitle: true,
         actions: [const SettingsButton()],
       ),
@@ -215,7 +218,7 @@ class _VRMaterialsResourceCard extends StatelessWidget {
                         : AppColors.mutedLeaf,
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  child: TextButton.icon(
+                  child: TextButton(
                     onPressed: () => _openResource(context),
                     style: TextButton.styleFrom(
                       foregroundColor: isDark
@@ -226,11 +229,19 @@ class _VRMaterialsResourceCard extends StatelessWidget {
                         vertical: 10,
                       ),
                     ),
-                    icon: Icon(
-                      entry.actionIcon,
-                      size: accessibleIconSize(context, 24),
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: 8,
+                      runSpacing: 4,
+                      children: [
+                        Icon(
+                          entry.actionIcon,
+                          size: accessibleIconSize(context, 24),
+                        ),
+                        Text(entry.actionLabel, textAlign: TextAlign.center),
+                      ],
                     ),
-                    label: Text(entry.actionLabel),
                   ),
                 ),
               ),
